@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="center">
+    <div class="form-content">
+      <h3 class="center">Sign up</h3>
+      <form [formGroup]="signupForm" class="login-form" novalidate>
+        <!-- username -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="username" placeholder="Username" class="form-email form-control"
+                 id="username" required>
+          <!-- error -->
+          <div *ngIf="username.invalid && (username.touched || username.dirty)" class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('username','required')">
+              Please input your username</small>
+          </div>
+        </div>
+
+        <!-- email -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="email" placeholder="Email" class="form-email form-control"
+                 id="email" required>
+          <!-- error -->
+          <div *ngIf="email.invalid && (email.touched || email.dirty)" class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('email','required')">
+              Please input your email address</small>
+            <small class="alert alert-danger" *ngIf="hasError('email','email')">
+              Email address example e.g.jdoe@126.com</small>
+          </div>
+        </div>
+
+        <!-- password -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="password" placeholder="Password"
+                 class="form-password form-control"
+                 id="password" required>
+          <!-- error -->
+          <div *ngIf="password.invalid && (password.touched || password.dirty)" class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('password','required')">
+              Please input your password</small>
+          </div>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="confirm_password" placeholder="Confirm password"
+                 class="form-password form-control"
+                 id="confirm_password" required>
+          <!-- error -->
+          <div *ngIf="confirm_password.invalid && (confirm_password.touched || confirm_password.dirty)"
+               class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('confirm_password','required')">
+              Please Confirm the password again</small>
+          </div>
+        </div>
+
+        <!-- Roles -->
+        <div class="form-group">
+          <label class="custom-control-inline">Roles</label>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="buyer"
+                   name="optionsRadios" value="1" checked>
+            <label class="custom-control-label" for="buyer">buyer</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="seller"
+                   name="optionsRadios" value="2">
+            <label class="custom-control-label" for="seller">seller</label>
+          </div>
+        </div>
+
+        <!-- Mobile number -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="mobile_number" placeholder="Mobile number"
+                 class="form-text form-control" id="mobile_number" required>
+          <!-- error -->
+          <div *ngIf="mobile_number.invalid && (mobile_number.touched || mobile_number.dirty)" class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('mobile_number','required')">
+              Please input your mobile number</small>
+          </div>
+        </div>
+
+        <!-- Contact number -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="contact_number" placeholder="Contact number"
+                 class="form-text form-control" id="contact_number" required>
+          <!-- error -->
+          <div *ngIf="contact_number.invalid && (contact_number.touched || contact_number.dirty)" class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('contact_number','required')">
+              Please input your contact number </small>
+          </div>
+        </div>
+
+        <!-- Company name -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="company_name" placeholder="Company name"
+                 class="form-text form-control" id="company_name" required>
+          <!-- error -->
+          <div *ngIf="company_name.invalid && (company_name.touched || company_name.dirty)"
+               class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('company_name','required')">
+              Please input your company name</small>
+          </div>
+        </div>
+
+        <!-- Company name -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="brief_about_company" placeholder="Brief about company"
+                 class="form-text form-control" id="brief_about_company">
+        </div>
+
+        <!-- Postal address -->
+        <div class="form-group">
+          <!-- input -->
+          <input type="text" formControlName="postal_address" placeholder="Postal address"
+                 class="form-text form-control" id="postal_address">
+        </div>
+      </form>
+      <button class="btn btn-large btn-block btn-primary" (click)="signup()">Sign up</button>
+    </div>
+  </div>
+</div>
+

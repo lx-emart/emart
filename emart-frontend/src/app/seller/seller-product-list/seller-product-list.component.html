@@ -1,0 +1,60 @@
+<div class="container ">
+  <div class="row form-group">
+  </div>
+  <div class="row">
+    <div class="form-group form-inline">
+      <input class="form-control ml-2" type="text" name="searchTerm" placeholder="search"/>
+      <label class="padding-left" for="categoryType">CategoryType</label>
+      <select class="custom-select ml-2" id="categoryType" name="categoryType"
+              required>
+        <option [ngValue]=0>Any</option>
+        <option [ngValue]=1>Food</option>
+        <option [ngValue]=2>Clothes</option>
+        <option [ngValue]=3>Drink</option>
+      </select>
+      <label class="padding-left">
+        <button class="btn btn-primary ">search</button>
+      </label>
+      <label class="padding-left">
+        <button class="btn btn-primary ">Add Commodity</button>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <table id="table" class="table table-striped text-center">
+      <thead>
+      <tr>
+        <th scope="col">Picture</th>
+        <th scope="col">Code</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Type</th>
+        <th scope="col">Sales volume</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th class="align-middle" scope="row">
+          <img height="100px">
+        </th>
+        <td class="align-middle">1</td>
+        <td class="align-middle">2</td>
+        <td class="align-middle">3</td>
+        <td class="align-middle">4</td>
+        <td class="align-middle">5</td>
+        <td class="align-middle">6</td>
+        <td class="align-middle">7</td>
+        <td class="align-middle">
+          <a style="display: block" routerLink="/seller/product/1/edit">
+            edit</a>
+          <a style="display: block" routerLink="/seller/product/1/edit">
+            comment</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

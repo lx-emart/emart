@@ -1,0 +1,38 @@
+<h1 align="center" class="display-7 mb-5">Detail</h1>
+
+<div class="row text-center justify-content-center">
+  <div class="col-lg-6 ">
+    <div class="card mb-4 ">
+      <img height="60%" class="card-img-top" src="">
+      <div class="card-body">
+        <h4 class="card-title ">name</h4>
+        <form [formGroup]="buyerDetailForm" class="login-form" novalidate>
+          <div class="text-left">
+            <input hidden name="productId" [value]=111>
+            <p class="card-test"><strong>name: </strong>name</p>
+            <p class="card-text">
+              <strong>Price: </strong>
+              <label id="price">price</label>
+            </p>
+            <p class="card-text"><strong>Stock: </strong>stock</p>
+
+            <label class="card-text">
+              <strong>Quantity: </strong>
+              <input
+                type="number"
+                name="count"
+                required
+                min="1"
+                [max]=1
+              >
+            </label>
+            <p class="card-text"><strong>Type: </strong>
+              <label id="subtotal">phno</label>
+            </p>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Add Cart</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

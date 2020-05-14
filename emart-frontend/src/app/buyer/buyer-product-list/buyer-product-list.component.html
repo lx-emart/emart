@@ -1,0 +1,56 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="form-group form-inline">
+      <input class="form-control ml-2" type="text" name="searchTerm" placeholder="search"/>
+      <label class="padding-left" for="manufacturer">Manufacturer</label>
+      <select class="custom-select ml-2" id="manufacturer" name="manufacturer"
+              required>
+        <option [ngValue]=0>Any</option>
+        <option [ngValue]=1>TLC</option>
+        <option [ngValue]=2>Lancome</option>
+        <option [ngValue]=3>Apple</option>
+      </select>
+      <label class="padding-left" for="categoryType">CategoryType</label>
+      <select class="custom-select ml-2" id="categoryType" name="categoryType"
+              required>
+        <option [ngValue]=0>Any</option>
+        <option [ngValue]=1>TV</option>
+        <option [ngValue]=2>iphone</option>
+        <option [ngValue]=3>Makeup</option>
+      </select>
+      <label class="padding-left" for="stratPrice">price</label>
+      <select class="custom-select ml-2" id="stratPrice" name="stratPrice"
+              required>
+        <option [ngValue]=0>100</option>
+        <option [ngValue]=1>1000</option>
+        <option [ngValue]=2>10000</option>
+        <option [ngValue]=3>100000</option>
+      </select>
+      <label class="padding-left">
+        <button class="btn btn-primary ">search</button>
+      </label>
+    </div>
+  </div>
+  <hr>
+  <div class="row card-deck text-center">
+    <div class="col-lg-4 ">
+      <div class="card mb-4">
+        <img height="50%" class="card-img-top">
+        <div class="card-body">
+          <h4 class="card-title ">name</h4>
+          <div class="text-left">
+            <p class="card-test"><strong>Type: </strong>type</p>
+            <p class="card-text"><strong>Price: </strong>price</p>
+            <p class="card-text"><strong>Stock: </strong>stock</p>
+            <p class="card-text"><strong>Salesvolume: </strong>Salesvolume</p>
+          </div>
+          <br>
+          <a routerLink="/product/1" class="btn btn-primary btn-lg">detail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,36 @@
+<h1 align="center" class="display-7 mb-5">edit</h1>
+
+<div class="row text-center justify-content-center">
+  <div class="col-lg-6 ">
+    <div class="card">
+      <!-- Picture -->
+      <img height="60%" class="card-img-top" src="">
+      <div class="card-body">
+        <form [formGroup]="editForm" class="login-form" novalidate>
+          <div class="text-left">
+            <input hidden name="productId" [value]=111>
+
+            <p class="card-test"><strong>number: </strong>number</p>
+
+            <p class="card-test"><strong>name: </strong>name</p>
+
+            <p class="card-text">
+              <strong>Price: </strong>
+              <input type="number" name="price" id="price" required>
+            </p>
+
+            <p class="card-text">
+              <strong>Quantity: </strong>
+              <input type="number" name="quantity" id="quantity" required>
+            </p>
+
+            <p class="card-text"><strong>Type: </strong>
+              <label id="subtotal">phno</label>
+            </p>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
