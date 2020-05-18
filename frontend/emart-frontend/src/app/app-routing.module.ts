@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {AuthGuard} from './guards/auth.guard';
+import {HomeComponent} from './component/home/home.component';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {PasswordComponent} from './password/password.component';
@@ -15,6 +16,7 @@ import {EvaluateComponent} from './buyer/evaluate/evaluate.component';
 import {CartComponent} from './buyer/cart/cart.component';
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'password', component: PasswordComponent},

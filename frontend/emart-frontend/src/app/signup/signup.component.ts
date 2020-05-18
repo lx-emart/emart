@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {User} from '../models/User';
+import {UserService} from '../services/user.service';
 
 
 @Component({
@@ -15,7 +17,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
   }
 
@@ -25,12 +28,17 @@ export class SignupComponent implements OnInit {
         username: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required]],
-        confirm_password: ['', [Validators.required]],
-        mobile_number: ['', [Validators.required]],
-        contact_number: ['', [Validators.required]],
-        company_name: ['', [Validators.required]],
-        mentor: ['']
+        confirmPassword: ['', [Validators.required]],
+        mobileNumber: ['', [Validators.required]],
+        contactNumber: ['', [Validators.required]],
+        companyName: ['', [Validators.required]],
+        briefAboutCompany: ['', []],
+        postalAddress: ['', []],
+        optionsRadios:  ['', []],
+        buyer:  ['', []],
+        seller:  ['', []]
       });
+    this.signupForm.patchValue({optionsRadios: '1'});
   }
 
   get username(): AbstractControl {
@@ -45,8 +53,8 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('password');
   }
 
-  get confirm_password(): AbstractControl {
-    return this.signupForm.get('confirm_password');
+  get confirmPassword(): AbstractControl {
+    return this.signupForm.get('confirmPassword');
   }
 
   get buyer(): AbstractControl {
@@ -57,44 +65,67 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('seller');
   }
 
-  get mobile_number(): AbstractControl {
-    return this.signupForm.get('mobile_number');
+  get optionsRadios(): AbstractControl {
+    return this.signupForm.get('optionsRadios');
   }
 
-  get contact_number(): AbstractControl {
-    return this.signupForm.get('contact_number');
+  get mobileNumber(): AbstractControl {
+    return this.signupForm.get('mobileNumber');
   }
 
-  get company_name(): AbstractControl {
-    return this.signupForm.get('company_name');
+  get contactNumber(): AbstractControl {
+    return this.signupForm.get('contactNumber');
   }
 
-  get brief_about_company(): AbstractControl {
-    return this.signupForm.get('brief_about_company');
+  get companyName(): AbstractControl {
+    return this.signupForm.get('companyName');
   }
 
-  get postal_address(): AbstractControl {
-    return this.signupForm.get('postal_address');
+  get briefAboutCompany(): AbstractControl {
+    return this.signupForm.get('briefAboutCompany');
   }
 
-  get mentor(): AbstractControl {
-    return this.signupForm.get('mentor');
+  get postalAddress(): AbstractControl {
+    return this.signupForm.get('postalAddress');
   }
 
   hasError = (controlName: string, errorName: string) => {
     return this.signupForm.controls[controlName].hasError(errorName);
-  };
+  }
 
   signup() {
     this.checkValid(
       this.username,
       this.email,
       this.password,
-      this.confirm_password,
-      this.mobile_number,
-      this.contact_number,
-      this.company_name
+      this.confirmPassword,
+      this.mobileNumber,
+      this.contactNumber,
+      this.companyName
     );
+
+    const aa = this.buyer.value;
+    const bb = this.seller.value;
+
+    const user: User = {
+      username: this.username.value,
+      email: this.email.value,
+      roles: this.optionsRadios.value,
+      password: this.password.value,
+      confirmPassword: this.confirmPassword.value,
+      mobileNumber: this.mobileNumber.value,
+      contactNumber: this.contactNumber.value,
+      companyName: this.companyName.value,
+      briefAboutCompany: this.briefAboutCompany.value,
+      postalAddress: this.postalAddress.value
+    };
+
+    this.userService.signUp(user).subscribe(data => {
+        this.router.navigate(['login']);
+    },
+    error => {
+      console.log(error); // log to console instead
+    });
 
   }
 

@@ -45,13 +45,13 @@
         <!-- Confirm password -->
         <div class="form-group">
           <!-- input -->
-          <input type="text" formControlName="confirm_password" placeholder="Confirm password"
+          <input type="text" formControlName="confirmPassword" placeholder="Confirm password"
                  class="form-password form-control"
-                 id="confirm_password" required>
+                 id="confirmPassword" required>
           <!-- error -->
-          <div *ngIf="confirm_password.invalid && (confirm_password.touched || confirm_password.dirty)"
+          <div *ngIf="confirmPassword.invalid && (confirmPassword.touched || confirmPassword.dirty)"
                class="promote-error">
-            <small class="alert alert-danger" *ngIf="hasError('confirm_password','required')">
+            <small class="alert alert-danger" *ngIf="hasError('confirmPassword','required')">
               Please Confirm the password again</small>
           </div>
         </div>
@@ -61,12 +61,12 @@
           <label class="custom-control-inline">Roles</label>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="buyer"
-                   name="optionsRadios" value="1" checked>
+                   formControlName="optionsRadios" value="1" checked>
             <label class="custom-control-label" for="buyer">buyer</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="seller"
-                   name="optionsRadios" value="2">
+                   formControlName="optionsRadios" value="2">
             <label class="custom-control-label" for="seller">seller</label>
           </div>
         </div>
@@ -74,11 +74,11 @@
         <!-- Mobile number -->
         <div class="form-group">
           <!-- input -->
-          <input type="text" formControlName="mobile_number" placeholder="Mobile number"
-                 class="form-text form-control" id="mobile_number" required>
+          <input type="text" formControlName="mobileNumber" placeholder="Mobile number"
+                 class="form-text form-control" id="mobileNumber" required>
           <!-- error -->
-          <div *ngIf="mobile_number.invalid && (mobile_number.touched || mobile_number.dirty)" class="promote-error">
-            <small class="alert alert-danger" *ngIf="hasError('mobile_number','required')">
+          <div *ngIf="mobileNumber.invalid && (mobileNumber.touched || mobileNumber.dirty)" class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('mobileNumber','required')">
               Please input your mobile number</small>
           </div>
         </div>
@@ -86,11 +86,11 @@
         <!-- Contact number -->
         <div class="form-group">
           <!-- input -->
-          <input type="text" formControlName="contact_number" placeholder="Contact number"
-                 class="form-text form-control" id="contact_number" required>
+          <input type="text" formControlName="contactNumber" placeholder="Contact number"
+                 class="form-text form-control" id="contactNumber" required>
           <!-- error -->
-          <div *ngIf="contact_number.invalid && (contact_number.touched || contact_number.dirty)" class="promote-error">
-            <small class="alert alert-danger" *ngIf="hasError('contact_number','required')">
+          <div *ngIf="contactNumber.invalid && (contactNumber.touched || contactNumber.dirty)" class="promote-error">
+            <small class="alert alert-danger" *ngIf="hasError('contactNumber','required')">
               Please input your contact number </small>
           </div>
         </div>
@@ -98,12 +98,12 @@
         <!-- Company name -->
         <div class="form-group">
           <!-- input -->
-          <input type="text" formControlName="company_name" placeholder="Company name"
-                 class="form-text form-control" id="company_name" required>
+          <input type="text" formControlName="companyName" placeholder="Company name"
+                 class="form-text form-control" id="companyName" required>
           <!-- error -->
-          <div *ngIf="company_name.invalid && (company_name.touched || company_name.dirty)"
+          <div *ngIf="companyName.invalid && (companyName.touched || companyName.dirty)"
                class="promote-error">
-            <small class="alert alert-danger" *ngIf="hasError('company_name','required')">
+            <small class="alert alert-danger" *ngIf="hasError('companyName','required')">
               Please input your company name</small>
           </div>
         </div>
@@ -111,15 +111,15 @@
         <!-- Company name -->
         <div class="form-group">
           <!-- input -->
-          <input type="text" formControlName="brief_about_company" placeholder="Brief about company"
-                 class="form-text form-control" id="brief_about_company">
+          <input type="text" formControlName="briefAboutCompany" placeholder="Brief about company"
+                 class="form-text form-control" id="briefAboutCompany">
         </div>
 
         <!-- Postal address -->
         <div class="form-group">
           <!-- input -->
-          <input type="text" formControlName="postal_address" placeholder="Postal address"
-                 class="form-text form-control" id="postal_address">
+          <input type="text" formControlName="postalAddress" placeholder="Postal address"
+                 class="form-text form-control" id="postalAddress">
         </div>
       </form>
       <button class="btn btn-large btn-block btn-primary" (click)="signup()">Sign up</button>

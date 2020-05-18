@@ -1,0 +1,9 @@
+<ngb-carousel #carousel [interval]="5000">
+  <ng-template ngbSlide *ngFor="let img of images; index as i">
+    <a href="" target="_blank" rel="nofollow noopener noreferrer">
+      <div class="picsum-img-wrapper">
+        <img style="width: 100%" [src]="img" alt="My image {{i + 1}} description">
+      </div>
+    </a>
+  </ng-template>
+</ngb-carousel>

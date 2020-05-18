@@ -13,7 +13,7 @@ import {Role} from "../enum/Role";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  returnUrl: String;
+  returnUrl: any;
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   hasError = (controlName: string, errorName: string) => {
     return this.loginForm.controls[controlName].hasError(errorName);
-  };
+  }
 
   login() {
     if (!this.checkValid(this.username) || !this.checkValid(this.password)) {
@@ -59,11 +59,11 @@ export class LoginComponent implements OnInit {
           if (user) {
             //const info: any = user;
             if (user.roles == Role.SELLER) {
-
-              this.returnUrl = '/seller';
+              this.returnUrl = '/seller-product-list';
+            } else if (user.roles == Role.BUYER) {
+              this.returnUrl = '/buyer-product-list';
             }
             this.router.navigate([this.returnUrl]);
-            //this.router.navigateByUrl(this.returnUrl);
           }
         }
       );

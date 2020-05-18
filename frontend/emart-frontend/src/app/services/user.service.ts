@@ -1,10 +1,16 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {apiUrl} from '../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
 import {User} from "../models/User";
 import {JwtResponse} from '../response/JwtResponse';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders(
+    { 'Content-Type': 'application/json'}
+  )
+};
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +32,12 @@ export class UserService {
 
   // sign in
   login(data): Observable<JwtResponse> {
-    const url = `${apiUrl}/login`;
-    return this.http.post<JwtResponse>(url, data).pipe(
-      tap(user => {
-        if (user && user.token) {
-          localStorage.setItem('current_user', JSON.stringify(user));
-          return user;
+    const url = `${apiUrl}/api/login`;
+    return this.http.post<JwtResponse>(url, data, httpOptions)
+    .pipe(tap(datasponse => {
+        if (data.token) {
+          localStorage.setItem('current_user', JSON.stringify(data));
+          return data;
         }
       }),
       catchError(this.handleError('Login Failed', null))
@@ -45,7 +51,7 @@ export class UserService {
 
   // sign up
   signUp(user: User): Observable<User> {
-    const url = `${apiUrl}/signup`;
+    const url = `${apiUrl}/api/signup`;
     return this.http.post<User>(url, user);
   }
 

@@ -70,7 +70,7 @@ public class UserControllerTest {
     public void test_login() throws Exception {
 		
 		LoginForm form = new LoginForm();
-		form.setEmail("123@ibm.com");
+		form.setUsername("123@ibm.com");
 		form.setPassword("123456");
 		ObjectMapper mapper = new ObjectMapper();
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
@@ -92,7 +92,7 @@ public class UserControllerTest {
     public void test_login_error() throws Exception {
 		
 		LoginForm form = new LoginForm();
-		form.setEmail("123@ibm.com");
+		form.setUsername("123@ibm.com");
 		form.setPassword("123");
 		ObjectMapper mapper = new ObjectMapper();
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
@@ -114,7 +114,7 @@ public class UserControllerTest {
     public void test_login_error1() throws Exception {
 		
 		LoginForm form = new LoginForm();
-		form.setEmail("123@ibm");
+		form.setUsername("123@ibm");
 		form.setPassword("123456");
 		ObjectMapper mapper = new ObjectMapper();
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();

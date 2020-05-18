@@ -3,7 +3,7 @@ server:
   
 spring: 
   application: 
-    name: emart-user-api
+    name: user-api
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/emart_user?useUnicode=true&characterEncoding=utf8

@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import com.ibm.fsd.dto.UserDto;
-import com.ibm.fsd.form.LoginForm;
 import com.ibm.fsd.jwt.JwtResponse;
 import com.ibm.fsd.service.JwtService;
 import com.ibm.fsd.service.SecurityService;
@@ -17,6 +16,7 @@ import com.ibm.fsd.service.UserService;
 /**
  * user controller
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -42,13 +42,12 @@ public class UserController {
 	 * @return token
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<JwtResponse> login(@RequestBody LoginForm form) {
+	public ResponseEntity<JwtResponse> login(@RequestBody UserDto dto) {
 
 		// JWT Authentication
 		UserDetails userDetails = null;
 		try {
-			userDetails = jwtService.authenticate(form.getEmail(), form.getPassword());
+			userDetails = jwtService.authenticate(dto.getUsername(), dto.getPassword());
 		} catch (AuthenticationException e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
@@ -57,16 +56,38 @@ public class UserController {
 		final String token = jwtService.generateToken(userDetails);
 
 		// get user info
-		UserDto userDto = userService.login(form.getEmail(), form.getPassword());
+		UserDto userDto = userService.login(dto.getUsername(), dto.getPassword());
 
 		// result return
 		return ResponseEntity.ok(
-				new JwtResponse(token, 
-						userDto.getId(), 
-						userDto.getEmail(), 
-						userDto.getUsername(), 
-						userDto.getRoles()
-				)
-		);
+				new JwtResponse(token, userDto.getId(), userDto.getEmail(), userDto.getUsername(), userDto.getRoles()));
+	}
+
+	/**
+	 * sign up
+	 * 
+	 * @param dto
+	 */
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ResponseEntity<UserDto> signup(@RequestBody UserDto dto) {
+		try {
+			return ResponseEntity.ok(userService.signup(dto));
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+	
+	/**
+	 * password update
+	 * 
+	 * @param dto
+	 */
+	@RequestMapping(value = "/passwordUpdate", method = RequestMethod.POST)
+	public ResponseEntity<Integer> password(@RequestBody UserDto dto) {
+		try {
+			return ResponseEntity.ok(userService.password(dto));
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 }

@@ -23,6 +23,7 @@ import {PurchaseHistoryComponent} from './buyer/purchase-history/purchase-histor
 import {EvaluateComponent} from './buyer/evaluate/evaluate.component';
 import {CartComponent} from './buyer/cart/cart.component';
 import {PricePipe} from './pipe/price.pipe';
+import {HomeComponent} from './component/home/home.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {PricePipe} from './pipe/price.pipe';
     EvaluateComponent,
     CartComponent,
     PricePipe,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import {PricePipe} from './pipe/price.pipe';
     NgbModule,
     HttpClientModule,
   ],
-  providers: [UserService,
+  providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
