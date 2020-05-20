@@ -2,7 +2,8 @@ package com.ibm.fsd.entity;
 
 import lombok.*;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -55,11 +56,11 @@ public class User implements Serializable {
     private String postalAddress;
     
 	@Column(name = "create_time")
-    @CreatedDate
+    @CreationTimestamp
     private Date createTime;
     
 	@Column(name = "update_time")
-    @CreatedDate
+	@UpdateTimestamp
     private Date updateTime;
 
 }

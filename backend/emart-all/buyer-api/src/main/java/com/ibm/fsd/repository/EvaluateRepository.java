@@ -1,0 +1,16 @@
+package com.ibm.fsd.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.ibm.fsd.entity.Evaluate;
+
+
+/**
+ * Evaluate Repository
+ */
+@Repository
+public interface EvaluateRepository extends JpaRepository<Evaluate, String> {
+	
+	Evaluate findByProductCodeAndUserId(String productCode, int userId);
+}
