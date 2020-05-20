@@ -29,32 +29,31 @@
         <th scope="col">Name</th>
         <th scope="col">Price</th>
         <th scope="col">Stock</th>
-        <th scope="col">Type</th>
+        <th scope="col">Category</th>
         <th scope="col">Sales volume</th>
         <th scope="col">Status</th>
         <th scope="col">Action</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <th class="align-middle" scope="row">
-          <img height="100px">
-        </th>
-        <td class="align-middle">1</td>
-        <td class="align-middle">2</td>
-        <td class="align-middle">3</td>
-        <td class="align-middle">4</td>
-        <td class="align-middle">5</td>
-        <td class="align-middle">6</td>
-        <td class="align-middle">7</td>
-        <td class="align-middle">
-          <a style="display: block" routerLink="/seller/product/1/edit">
-            edit</a>
-          <a style="display: block" routerLink="/seller/product/1/edit">
-            comment</a>
-        </td>
-      </tr>
+        <tr *ngFor="let product of page?.content">
+          <th class="align-middle" scope="row">
+              <img height="100px" src="{{product.imageUrl}" alt="{{product.name}}">
+          </th>
+          <td class="align-middle">{{product.code}}</td>
+          <td class="align-middle">{{product.name}}</td>
+          <td class="align-middle">{{product.price | currency}}</td>
+          <td class="align-middle">{{product.stock}}</td>
+          <td class="align-middle">01</td>
+          <td class="align-middle">11</td>          
+          <td class="align-middle">{{product.isActive}}</td>
+          <td class="align-middle">
+              <a style="display: block" routerLink="/api/seller/product/{{product.code}}/edit">
+                  Edit</a>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
+<app-page [currentPage]="page"></app-page>

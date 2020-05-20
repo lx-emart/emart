@@ -6,6 +6,7 @@ export const environment = {
   production: true
 };
 export const apiUrl = 'http://localhost:8080';
+export const sellerApiUrl = 'http://localhost:8081';
 
 /*
  * For easier debugging in development mode, you can import the following file

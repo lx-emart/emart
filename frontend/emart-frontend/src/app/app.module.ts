@@ -24,6 +24,7 @@ import {EvaluateComponent} from './buyer/evaluate/evaluate.component';
 import {CartComponent} from './buyer/cart/cart.component';
 import {PricePipe} from './pipe/price.pipe';
 import {HomeComponent} from './component/home/home.component';
+import { PageComponent } from './component/page/page.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {HomeComponent} from './component/home/home.component';
     CartComponent,
     PricePipe,
     HomeComponent,
+    PageComponent,
   ],
   imports: [
     BrowserModule,

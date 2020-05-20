@@ -2,20 +2,17 @@
 <div style="width:40%; margin: 25px auto">
   <form [formGroup]="sellerProductAddForm" class="login-form" novalidate>
 
-    <!--Manufacturer-->
-    <div class="form-group">
-      <label>Manufacturer</label>
-      <select class="custom-select" formControlName="manufacturer" name="manufacturer" id="manufacturer">
-        <option>
-          IPCS
-        </option>
-      </select>
-    </div>
-
     <!--Id-->
     <div class="form-group">
       <label for="productId">Code</label>
-      <input type="text" class="form-control" id="productId" name="productId" required>
+      <input type="text" class="form-control" id="productId" name="productId" placeholder="Code" required>
+    </div>
+
+    <!--Name-->
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" id="productName"
+             name="productName" placeholder="Name" required>
     </div>
 
     <!--Picture-->
@@ -25,11 +22,14 @@
       <input type="text" class="form-control" id="productIcon" name="productIcon" placeholder="Picture">
     </div>
 
-    <!--Name-->
+    <!--Manufacturer-->
     <div class="form-group">
-      <label>Name</label>
-      <input type="text" class="form-control" id="productName"
-             name="productName" placeholder="Name" required>
+      <label>Manufacturer</label>
+      <select class="custom-select" formControlName="manufacturer" name="manufacturer" id="manufacturer">
+        <option>
+            IPCS
+        </option>
+      </select>
     </div>
 
     <!--Category-->
@@ -48,9 +48,10 @@
     <div class="form-group">
       <label for="productPrice">Price</label>
       <input class="form-control"
-             type="number"
+             type="text"
              id="productPrice"
              name="productPrice"
+             placeholder="Price"
              required>
     </div>
 
@@ -62,7 +63,14 @@
              id="productStock"
              name="productStock"
              min="0"
+             placeholder="Stock"
              required>
+    </div>
+
+    <!--description-->
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Description">
     </div>
 
     <!--Discount-->
@@ -73,6 +81,7 @@
              id="productDiscount"
              name="productDiscount"
              min="0"
+             placeholder="Discount"
              required>
     </div>
     <div class="form-group">
