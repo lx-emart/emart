@@ -2,23 +2,22 @@
   <div class="row form-group">
   </div>
   <div class="row">
-    <div class="form-group form-inline">
-      <input class="form-control ml-2" type="text" name="searchTerm" placeholder="search"/>
+    <form [formGroup]="searchForm" novalidate>
+      <div class="form-group form-inline">
+      <input class="form-control ml-2" type="text" id="searchTerm" formControlName="searchTerm" placeholder="input product code search"/>
       <label class="padding-left" for="categoryType">CategoryType</label>
-      <select class="custom-select ml-2" id="categoryType" name="categoryType"
-              required>
-        <option [ngValue]=0>Any</option>
-        <option [ngValue]=1>Food</option>
-        <option [ngValue]=2>Clothes</option>
-        <option [ngValue]=3>Drink</option>
+      <select class="custom-select ml-2" id="categorytype" formControlName="categorytype">
+        <option value="">ALL</option>
+        <option *ngFor="let item of categorys" [value]="item.categoryCode">{{item.categoryName}}</option>
       </select>
       <label class="padding-left">
-        <button class="btn btn-primary ">search</button>
+        <button class="btn btn-primary" (click)="search()">Search</button>
       </label>
       <label class="padding-left">
-        <button class="btn btn-primary ">Add Commodity</button>
+        <button class="btn btn-primary" routerLink="/seller-product-add" >Add Product</button>
       </label>
     </div>
+  </form>
   </div>
   <div class="row">
     <table id="table" class="table table-striped text-center">
@@ -38,18 +37,18 @@
       <tbody>
         <tr *ngFor="let product of page?.content">
           <th class="align-middle" scope="row">
-              <img height="100px" src="{{product.imageUrl}" alt="{{product.name}}">
+              <img height="100px" src="{{product.imageUrl}}" alt="{{product.name}}">
           </th>
           <td class="align-middle">{{product.code}}</td>
           <td class="align-middle">{{product.name}}</td>
           <td class="align-middle">{{product.price | currency}}</td>
           <td class="align-middle">{{product.stock}}</td>
-          <td class="align-middle">01</td>
-          <td class="align-middle">11</td>          
-          <td class="align-middle">{{product.isActive}}</td>
+          <td class="align-middle">{{CategoryType[product.categoryCode]}}</td>
+          <td class="align-middle">{{product.salesVolume}}</td>          
+          <td class="align-middle">{{ProductStatus[product.active]}}</td>
           <td class="align-middle">
-              <a style="display: block" routerLink="/api/seller/product/{{product.code}}/edit">
-                  Edit</a>
+              <a style="display: block" routerLink="/seller-product-edit/{{product.code}}">Edit</a>
+              <a style="display: block" (click)="remove(page.content, product.code)" routerLink="./">Remove</a>
           </td>
         </tr>
       </tbody>

@@ -1,36 +1,108 @@
-<h1 align="center" class="display-7 mb-5">edit</h1>
+<h1 align="center" class="display-7 mb-5">Product Edit</h1>
 
-<div class="row text-center justify-content-center">
-  <div class="col-lg-6 ">
-    <div class="card">
-      <!-- Picture -->
-      <img height="60%" class="card-img-top" src="">
-      <div class="card-body">
-        <form [formGroup]="editForm" class="login-form" novalidate>
-          <div class="text-left">
-            <input hidden name="productId" [value]=111>
+<div style="width:40%; margin: 15px auto">
+  <form [formGroup]="editForm" class="login-form" novalidate>
+    <!--Id-->
+    <div class="form-group">
+      <label>Product Code</label>
+      <input type="text" class="form-control form-control-lg" 
+                id="code" formControlName="code"
+                [readOnly]="true" [disabled]="true" placeholder="Product Code" required>
+    </div>
 
-            <p class="card-test"><strong>code: </strong>code</p>
-
-            <p class="card-test"><strong>name: </strong>name</p>
-
-            <p class="card-text">
-              <strong>Price: </strong>
-              <input type="number" name="price" id="price" required>
-            </p>
-
-            <p class="card-text">
-              <strong>Stock: </strong>
-              <input type="number" name="stock" id="stock" required>
-            </p>
-
-            <p class="card-text"><strong>Type: </strong>
-              <label id="subtotal">phno</label>
-            </p>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg">Save</button>
-        </form>
+    <!--Name-->
+    <div class="form-group">
+      <label>Product Name</label>
+      <input type="text" class="form-control form-control-lg" 
+                id="name" formControlName="name" placeholder="Product Name" required>
+      <!-- error -->
+      <div *ngIf="name.invalid && (name.touched || name.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('name','required')">
+          Please input product name</small>
       </div>
     </div>
-  </div>
+
+    <!--Picture-->
+    <div class="form-group">
+      <label>Photo Link</label>
+      <input type="text" class="form-control form-control-lg" 
+                id="imageUrl" formControlName="imageUrl" placeholder="Photo Link">
+      <!-- error -->
+      <div *ngIf="imageUrl.invalid && (imageUrl.touched || imageUrl.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('imageUrl','required')">
+          Please input product picture url</small>
+      </div>
+    </div>
+
+    <!--Price-->
+    <div class="form-group">
+      <label>Product Price</label>
+      <input class="form-control form-control-lg" type="number" id="price" min="1"
+              formControlName="price" placeholder="Price" required>
+      <!-- error -->
+      <div *ngIf="price.invalid && (price.touched || price.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('price','required')">
+          Please input product price</small>
+      </div>
+    </div>
+
+    <!--Stock-->
+    <div class="form-group">
+      <label>Product Stock</label>
+      <input class="form-control form-control-lg" type="number" id="stock" min="1"
+              formControlName="stock" min="1" placeholder="Stock" required>
+      <!-- error -->
+      <div *ngIf="stock.invalid && (stock.touched || stock.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('stock','required')">
+          Please input product stock</small>
+      </div>
+    </div>
+
+    <!--description-->
+    <div class="form-group">
+      <label>Product Description</label>
+      <textarea type="text" class="form-control form-control-lg text-left" 
+            id="description" formControlName="description" placeholder="Description"></textarea>
+      <!-- error -->
+      <div *ngIf="description.invalid && (description.touched || description.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('description','required')">
+          Please input product description</small>
+      </div>
+    </div>
+
+    <!--Discount-->
+    <div class="form-group">
+      <label>Product Discount</label>
+      <input class="form-control form-control-lg" 
+              type="number" id="discount" formControlName="discount" min="0" placeholder="Discount" required>
+    </div>
+
+    <!--Manufacturer-->
+    <div class="form-group">
+      <label>Manufacturer</label>
+      <select class="custom-select form-control-lg" formControlName="manufacturer" id="manufacturer">
+        <option *ngFor="let item of manufacturers" [value]="item.manufacturerCode">{{item.manufacturerName}}</option>
+      </select>
+    </div>
+
+    <!--Category-->
+    <div class="form-group">
+      <label for="categoryType">Category</label>
+      <select class="custom-select form-control-lg" id="categoryType" formControlName="categoryType" required>
+        <option *ngFor="let item of categorys" [value]="item.categoryCode">{{item.categoryName}}</option>
+      </select>
+    </div>
+
+    <!--Active-->
+    <div class="form-group">
+      <label>Active</label>
+      <select class="custom-select form-control-lg" formControlName="active" id="active" required>
+        <option value="0">Sell</option>
+        <option value="1">Sell Up</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()" >Submit</button>
+    </div>
+  </form>
 </div>

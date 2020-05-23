@@ -36,7 +36,11 @@ export class UserService {
     return this.http.post<JwtResponse>(url, data, httpOptions)
     .pipe(tap(datasponse => {
         if (data.token) {
-          localStorage.setItem('current_user', JSON.stringify(data));
+          if (data.remembered) {
+            localStorage.setItem('current_user', JSON.stringify(data));
+          }
+          console.log((data.name));
+          this.currentUserSubject.next(data);
           return data;
         }
       }),

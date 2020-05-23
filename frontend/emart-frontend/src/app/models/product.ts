@@ -7,11 +7,12 @@ export class Product {
 	price: number;
 	stock: number;
 	discount: number;
-	isActive: string;
+	salesVolume: number;
+	active: string;
 	categoryCode: string;
 	manufacturerCode: string;
 	imageUrl: string;
-	createTime: string;
-    updateTime: string;
+	createTime: Date;
+    updateTime: Date;
 }
 

@@ -103,10 +103,7 @@ export class SignupComponent implements OnInit {
       this.contactNumber,
       this.companyName
     );
-
-    const aa = this.buyer.value;
-    const bb = this.seller.value;
-
+    
     const user: User = {
       username: this.username.value,
       email: this.email.value,

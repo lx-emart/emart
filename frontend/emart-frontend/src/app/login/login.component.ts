@@ -54,13 +54,13 @@ export class LoginComponent implements OnInit {
     };
 
     this.userService.login(data)
-      .subscribe(user => {
-          console.log(JSON.stringify(user));
-          if (user) {
-            //const info: any = user;
-            if (user.roles == Role.SELLER) {
+      .subscribe(data => {
+          console.log(JSON.stringify(data.resultBody));
+          if (data.resultBody) {
+            const info: any = data.resultBody;
+            if (info.roles == Role.SELLER) {
               this.returnUrl = '/seller-product-list';
-            } else if (user.roles == Role.BUYER) {
+            } else if (info.roles == Role.BUYER) {
               this.returnUrl = '/buyer-product-list';
             }
             this.router.navigate([this.returnUrl]);

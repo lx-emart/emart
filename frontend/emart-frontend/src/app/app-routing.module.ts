@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'password', component: PasswordComponent},
   {path: 'seller-product-list', component: SellerProductListComponent, canActivate: [AuthGuard]},
-  {path: 'seller-product-edit', component: SellerProductEditComponent, canActivate: [AuthGuard]},
+  {path: 'seller-product-edit/:code', component: SellerProductEditComponent, canActivate: [AuthGuard]},
   {path: 'seller-product-add', component: SellerProductAddComponent, canActivate: [AuthGuard]},
   {path: 'buyer-product-list', component: BuyerProductListComponent, canActivate: [AuthGuard]},
   {path: 'buyer-product-detail', component: BuyerProductDetailComponent, canActivate: [AuthGuard]},

@@ -1,93 +1,110 @@
 <h1 align="center" class="display-7 mb-5">Add Product</h1>
-<div style="width:40%; margin: 25px auto">
-  <form [formGroup]="sellerProductAddForm" class="login-form" novalidate>
 
+<div style="width:40%; margin: 15px auto">
+  <form [formGroup]="productAddForm" class="login-form" novalidate>
     <!--Id-->
     <div class="form-group">
-      <label for="productId">Code</label>
-      <input type="text" class="form-control" id="productId" name="productId" placeholder="Code" required>
+      <label>Product Code</label>
+      <input type="text" class="form-control form-control-lg" id="code" formControlName="code" placeholder="Product Code" required>
+      <!-- error -->
+      <div *ngIf="code.invalid && (code.touched || code.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('code','required')">
+          Please input product code</small>
+      </div>
     </div>
 
     <!--Name-->
     <div class="form-group">
-      <label>Name</label>
-      <input type="text" class="form-control" id="productName"
-             name="productName" placeholder="Name" required>
+      <label>Product Name</label>
+      <input type="text" class="form-control form-control-lg" id="name" formControlName="name" placeholder="Product Name" required>
+      <!-- error -->
+      <div *ngIf="name.invalid && (name.touched || name.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('name','required')">
+          Please input product name</small>
+      </div>
     </div>
 
     <!--Picture-->
     <div class="form-group">
-      <label>Picture</label>
-      <img src="" class="img-rounded">
-      <input type="text" class="form-control" id="productIcon" name="productIcon" placeholder="Picture">
+      <label>Photo Link</label>
+      <input type="text" class="form-control form-control-lg" id="imageUrl" formControlName="imageUrl" placeholder="Photo Link">
+      <!-- error -->
+      <div *ngIf="imageUrl.invalid && (imageUrl.touched || imageUrl.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('imageUrl','required')">
+          Please input product picture url</small>
+      </div>
+    </div>
+
+    <!--Price-->
+    <div class="form-group">
+      <label>Product price</label>
+      <input class="form-control form-control-lg" type="number" id="price" min="1"
+              formControlName="price" placeholder="Price" required>
+      <!-- error -->
+      <div *ngIf="price.invalid && (price.touched || price.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('price','required')">
+          Please input product price</small>
+      </div>
+    </div>
+
+    <!--Stock-->
+    <div class="form-group">
+      <label>Product Stock</label>
+      <input class="form-control form-control-lg" type="number" id="stock" min="1"
+              formControlName="stock" min="1" placeholder="Stock" required>
+      <!-- error -->
+      <div *ngIf="stock.invalid && (stock.touched || stock.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('stock','required')">
+          Please input product stock</small>
+      </div>
+    </div>
+
+    <!--Description-->
+    <div class="form-group">
+      <label>Product Description</label>
+      <textarea type="text" class="form-control form-control-lg text-left" 
+            id="description" formControlName="description" placeholder="Description"></textarea>
+      <!-- error -->
+      <div *ngIf="description.invalid && (description.touched || description.dirty)" class="promote-error">
+        <small class="alert alert-danger" *ngIf="hasError('description','required')">
+          Please input product description</small>
+      </div>
+    </div>
+
+    <!--Discount-->
+    <div class="form-group">
+      <label>Product Discount</label>
+      <input class="form-control form-control-lg" 
+              type="number" id="discount" formControlName="discount" min="0" placeholder="Discount" required>
     </div>
 
     <!--Manufacturer-->
     <div class="form-group">
       <label>Manufacturer</label>
-      <select class="custom-select" formControlName="manufacturer" name="manufacturer" id="manufacturer">
-        <option>
-            IPCS
-        </option>
+      <select class="custom-select form-control-lg" formControlName="manufacturer" id="manufacturer">
+        <option *ngFor="let item of manufacturers" [value]="item.manufacturerCode">{{item.manufacturerName}}</option>
       </select>
     </div>
 
     <!--Category-->
     <div class="form-group">
       <label for="categoryType">Category</label>
-      <select class="custom-select" id="categoryType" name="categoryType"
-              required>
-        <option [ngValue]=0>Any</option>
-        <option [ngValue]=1>TV</option>
-        <option [ngValue]=2>iphone</option>
-        <option [ngValue]=3>Makeup</option>
+      <select class="custom-select form-control-lg" id="categoryType" formControlName="categoryType" required>
+        <option *ngFor="let item of categorys" [value]="item.categoryCode">{{item.categoryName}}</option>
       </select>
     </div>
 
-    <!--Price-->
+    <!--Active-->
     <div class="form-group">
-      <label for="productPrice">Price</label>
-      <input class="form-control"
-             type="text"
-             id="productPrice"
-             name="productPrice"
-             placeholder="Price"
-             required>
+      <label>Active</label>
+      <select class="custom-select form-control-lg" formControlName="active" id="active" required>
+        <option value="0">Sell</option>
+        <option value="1">Sell Up</option>
+      </select>
     </div>
 
-    <!--Stock-->
     <div class="form-group">
-      <label for="productStock">Stock</label>
-      <input class="form-control"
-             type="text"
-             id="productStock"
-             name="productStock"
-             min="0"
-             placeholder="Stock"
-             required>
-    </div>
-
-    <!--description-->
-    <div class="form-group">
-      <label>Description</label>
-      <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Description">
-    </div>
-
-    <!--Discount-->
-    <div class="form-group">
-      <label for="productDiscount">Discount</label>
-      <input class="form-control"
-             type="text"
-             id="productDiscount"
-             name="productDiscount"
-             min="0"
-             placeholder="Discount"
-             required>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-lg btn-primary btn-block" (click)="onSubmit()" >Submit</button>
     </div>
   </form>
-
-
 </div>
