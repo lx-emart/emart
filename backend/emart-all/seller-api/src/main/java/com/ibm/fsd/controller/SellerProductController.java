@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.fsd.entity.Category;
+import com.ibm.fsd.entity.Manufacturer;
 import com.ibm.fsd.entity.ProductEntity;
 import com.ibm.fsd.exception.ErrorConstants;
 import com.ibm.fsd.exception.RequestException;
+import com.ibm.fsd.models.Pages;
 import com.ibm.fsd.service.CategoryService;
+import com.ibm.fsd.service.ManufacturerService;
 import com.ibm.fsd.service.SellerProductService;
 
 
@@ -41,6 +44,9 @@ public class SellerProductController {
 	@Autowired
 	CategoryService categoryService;
 	
+	@Autowired
+	ManufacturerService manufacturerService;
+	
 	/**
 	 * product all
 	 * 
@@ -55,13 +61,27 @@ public class SellerProductController {
             @RequestParam(value = "size", defaultValue = "3") Integer size) {
 		return sellerProductService.findAll(PageRequest.of(page - 1, size));
 	}
+	
+	/**
+	 * find category
+	 * 
+	 * @param page
+	 * @param size
+	 * 
+	 * @return all data
+	 */
+	@RequestMapping(value = "/seller/search", method = RequestMethod.POST)
+	public Page<ProductEntity> findAllProductCodeAndCategoryCode(@Valid @RequestBody Pages pages) {
+		return sellerProductService.findAllProductCodeAndCategoryCode(
+				pages.getCode(), pages.getType(), PageRequest.of(pages.getPage() - 1, pages.getSize()));
+	}
 
 	/**
 	 * product one
 	 */
 	@RequestMapping(value = "/seller/product/{productCode}", method = RequestMethod.GET)
-	public ProductEntity findOne(@PathVariable("productCode") String productCode) {
-		return sellerProductService.findByOne(productCode);
+	public ResponseEntity<ProductEntity> findOne(@PathVariable("productCode") String productCode) {
+		return ResponseEntity.ok(sellerProductService.findByOne(productCode));
 	}
 	
 	/**
@@ -99,7 +119,7 @@ public class SellerProductController {
 	}
 	
 	/**
-	 * product edit
+	 * product delete
 	 */
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/seller/productDelete/{productCode}", method = RequestMethod.DELETE)
@@ -115,5 +135,14 @@ public class SellerProductController {
 	@RequestMapping(value = "/seller/category", method = RequestMethod.GET)
 	public List<Category> category() {
         return categoryService.findAll();
+	}
+	
+	/**
+	 * 
+	 * manufacturer type
+	 */
+	@RequestMapping(value = "/seller/manufacturer", method = RequestMethod.GET)
+	public List<Manufacturer> manufacturer() {
+        return manufacturerService.findAll();
 	}
 }

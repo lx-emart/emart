@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ibm.fsd.entity.ProductEntity;
 import com.ibm.fsd.exception.BusinessException;
+import com.ibm.fsd.repository.CategoryRepository;
 import com.ibm.fsd.repository.SellerProductRepository;
 import com.ibm.fsd.service.SellerProductService;
 
@@ -17,6 +18,9 @@ public class SellerProductServiceImpl implements SellerProductService {
 
 	@Autowired
 	SellerProductRepository sellerProductRepository;
+	
+	@Autowired
+	CategoryRepository categoryRepository;
 	
 	@Override
 	public Page<ProductEntity> findAll(Pageable pageable) {
@@ -36,8 +40,8 @@ public class SellerProductServiceImpl implements SellerProductService {
 
 	@Override
 	@Transactional
-	public ProductEntity update(ProductEntity entity) {
-		return sellerProductRepository.save(entity);
+	public int update(ProductEntity entity) {
+		return sellerProductRepository.update(entity);
 	}
 
 	@Override
@@ -46,5 +50,11 @@ public class SellerProductServiceImpl implements SellerProductService {
 		ProductEntity entity = findByOne(code);
 		if (entity == null) throw new BusinessException("10", "Product does not exit!");
 		sellerProductRepository.delete(entity);
+	}
+
+	@Override
+	public Page<ProductEntity> findAllProductCodeAndCategoryCode(String productCode, String categoryCode,
+			Pageable pageable) {
+		return sellerProductRepository.findByCodeOrCategoryCodeOrderByCodeAsc(productCode, categoryCode, pageable);
 	}
 }

@@ -46,8 +46,11 @@ public class Product implements Serializable {
 	@Column(name = "discount")
 	private double discount;
 	
-	@Column(name = "is_active")
-	private boolean isActive;
+	@Column(name = "sales_volume")
+	private int salesVolume;
+	
+	@Column(name = "active")
+	private String active;
 	
 	@Column(name = "category_code")
 	private String categoryCode;

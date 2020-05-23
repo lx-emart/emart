@@ -3,6 +3,7 @@ package com.ibm.fsd.entity;
 import lombok.*;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -12,8 +13,9 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "user")
-public class User implements Serializable {
+@Table(name = "users")
+@DynamicUpdate
+public class Users implements Serializable {
 
     /**
 	 * serialVersionUID
@@ -23,7 +25,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
     
     @Column(name = "username")
     private String username;

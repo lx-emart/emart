@@ -5,13 +5,13 @@ import lombok.Data;
 @Data
 public class JwtResponse {
 	
-	private Long id;
+	private int id;
 	private String email;
     private String username;
     private String roles;
     private String token;
 
-    public JwtResponse(String token, Long id, String email, String username, String roles) {
+    public JwtResponse(String token, int id, String email, String username, String roles) {
     	this.id = id;
     	this.email = email;
         this.username = username;

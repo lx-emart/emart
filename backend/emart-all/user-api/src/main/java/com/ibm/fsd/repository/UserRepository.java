@@ -15,6 +15,6 @@ import com.ibm.fsd.dto.UserDto;
 public interface UserRepository extends JwtRepository {
 	
 	@Modifying
-	@Query(value = "update user set password = :#{#user.password} where email=:#{#user.email}", nativeQuery = true)
+	@Query(value = "update users set password = :#{#user.password}, confirm_password = :#{#user.confirmPassword} where email=:#{#user.email}", nativeQuery = true)
 	int update(@Param("user") UserDto user);
 }

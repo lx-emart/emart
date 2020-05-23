@@ -68,7 +68,10 @@ public class UserController {
 	 * 
 	 * @param dto
 	 */
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@RequestMapping(value = "/signup"
+            ,produces = "application/json;charset=UTF-8"
+            ,consumes = "application/json;charset=UTF-8"
+            ,method = RequestMethod.POST)
 	public ResponseEntity<UserDto> signup(@RequestBody UserDto dto) {
 		try {
 			return ResponseEntity.ok(userService.signup(dto));
@@ -82,7 +85,10 @@ public class UserController {
 	 * 
 	 * @param dto
 	 */
-	@RequestMapping(value = "/passwordUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/passwordUpdate"
+            ,produces = "application/json;charset=UTF-8"
+            ,consumes = "application/json;charset=UTF-8"
+            ,method = RequestMethod.POST)
 	public ResponseEntity<Integer> password(@RequestBody UserDto dto) {
 		try {
 			return ResponseEntity.ok(userService.password(dto));

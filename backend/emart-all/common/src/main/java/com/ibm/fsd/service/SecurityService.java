@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.ibm.fsd.entity.Users;
 import com.ibm.fsd.repository.JwtRepository;
 
 /**
@@ -24,7 +25,7 @@ public class SecurityService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		// get email
-		com.ibm.fsd.entity.User user = jwtRepository.findByEmail(username);
+		Users user = jwtRepository.findByEmail(username);
 		
 		// null
 		if(user == null){

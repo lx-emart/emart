@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ibm.fsd.dto.UserDto;
-import com.ibm.fsd.entity.User;
+import com.ibm.fsd.entity.Users;
 import com.ibm.fsd.repository.UserRepository;
 import com.ibm.fsd.service.UserService;
 
@@ -38,7 +38,7 @@ class UserServiceImpl implements UserService {
 		UserDto dto = new UserDto();
 		
 		// get login info
-		User user = userRepository.findByEmail(email);
+		Users user = userRepository.findByEmail(email);
 		
 		// result copy
 		BeanUtils.copyProperties(user, dto);
@@ -58,7 +58,7 @@ class UserServiceImpl implements UserService {
 		// password
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		// user
-		User user = new User();
+		Users user = new Users();
 		// result copy
 		BeanUtils.copyProperties(dto, user);
 		// save
@@ -80,6 +80,7 @@ class UserServiceImpl implements UserService {
 	public int password(UserDto dto) {
 		// password
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+		dto.setConfirmPassword(passwordEncoder.encode(dto.getConfirmPassword()));;
 		
 		return userRepository.update(dto);
 	}

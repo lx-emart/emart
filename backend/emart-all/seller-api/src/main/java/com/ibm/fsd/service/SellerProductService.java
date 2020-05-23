@@ -13,8 +13,10 @@ import com.ibm.fsd.entity.ProductEntity;
 public interface SellerProductService {
 
 	Page<ProductEntity> findAll(Pageable pageable);
+	Page<ProductEntity> findAllProductCodeAndCategoryCode(
+			String productCode, String categoryCode, Pageable pageable);
 	ProductEntity findByOne(String code);
 	ProductEntity save(ProductEntity entity);
-	ProductEntity update(ProductEntity entity);
+	int update(ProductEntity entity);
 	void delete(String code);
 }
