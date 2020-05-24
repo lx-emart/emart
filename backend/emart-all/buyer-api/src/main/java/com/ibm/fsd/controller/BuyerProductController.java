@@ -59,7 +59,6 @@ public class BuyerProductController {
 		return buyerProductService.findAll(PageRequest.of(page - 1, size));
 	}
 	
-
 	/**
 	 * product list
 	 */
