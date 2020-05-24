@@ -37,9 +37,10 @@ export class UserService {
     const url = `${apiUrl}/api/login`;
     return this.http.post<JwtResponse>(url, data, httpOptions)
     .pipe(tap(user => {
-        if (user && user.token) {
-          localStorage.setItem('current_user', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+        const info: any = user;
+        if (info.resultBody && info.resultBody.token) {
+          localStorage.setItem('current_user', JSON.stringify(info.resultBody));
+          this.currentUserSubject.next(info.resultBody);
           return user;
         }
       }),
@@ -48,9 +49,10 @@ export class UserService {
   }
 
   // logout
-  // logout() {
-  //     localStorage.clear();
-  // }
+  logout() {
+      localStorage.clear();
+      this.currentUserSubject.next(null);
+  }
 
   // sign up
   signUp(user: User): Observable<User> {

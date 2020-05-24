@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {JwtResponse} from "../../response/JwtResponse";
+import {UserService} from "../../services/user.service";
+import {Role} from "../../enum/Role";
 
 @Component({
   selector: 'app-header',
@@ -7,10 +10,20 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() {
+  currentUser: JwtResponse;
+  Role = Role;
+
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.userService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
+
+  logout() {
+    this.userService.logout();
   }
 
 }

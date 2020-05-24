@@ -35,10 +35,8 @@ export class CartService {
   }
 
   addCart(cart: any, count: number): Observable<Cart> {
-    const memo = localStorage.getItem('current_user');
-    console.log(memo);
     const url = `${buyerApiUrl}/api/buyer/addCart`;
-    return this.http.post<Cart>(url, new Cart(cart, count, 0), httpOptions);
+    return this.http.post<Cart>(url, new Cart(cart, count, this.currentUser.id), httpOptions);
   }
 
   remove(cart: Cart) {

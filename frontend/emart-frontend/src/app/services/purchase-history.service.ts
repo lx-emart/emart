@@ -30,8 +30,7 @@ export class PurchaseHistoryService {
   }
 
   getAllPage(page: number, size: number): Observable<any> {
-    //const userId = this.currentUser.id;
-    const url = `${buyerApiUrl}/api/buyer/purchaseHistory?page=${page}&size=${size}&userId=${0}`;
+    const url = `${buyerApiUrl}/api/buyer/purchaseHistory?page=${page}&size=${size}&userId=${this.currentUser.id}`;
     return this.http.get(url).pipe();
   }
 
