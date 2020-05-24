@@ -58,6 +58,7 @@ public class BuyerProductController {
             @RequestParam(value = "size", defaultValue = "3") Integer size) {
 		return buyerProductService.findAll(PageRequest.of(page - 1, size));
 	}
+	
 
 	/**
 	 * product list
