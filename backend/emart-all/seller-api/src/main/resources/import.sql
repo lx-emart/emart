@@ -39,6 +39,7 @@ CREATE TABLE cart (
 	product_name         VARCHAR(50)    NOT NULL,
 	price                DECIMAL(10,2)  DEFAULT 0,
 	quantity             INT            DEFAULT 0,
+	stock                INT            DEFAULT 0,
 	discount             DECIMAL(5,2)   DEFAULT 0,
 	image_url            VARCHAR(100)   DEFAULT NULL,
 	user_id              int,
@@ -51,7 +52,8 @@ CREATE TABLE purchase_history (
     product_code         VARCHAR(50),
     product_name         VARCHAR(50),
 	price                DECIMAL(10,2)  DEFAULT 0,
-	purchase_date        date,
+	quantity             INT            DEFAULT 0,
+	purchase_date        VARCHAR(10),
 	image_url            VARCHAR(100)   DEFAULT NULL,
 	user_id              int,
 	create_time          timestamp,
@@ -64,7 +66,6 @@ CREATE TABLE evaluate (
 	product_name         VARCHAR(50),
 	comment_content      VARCHAR(500),
 	image_url            VARCHAR(100)   DEFAULT NULL,
-	user_id              int,
 	create_time          timestamp,
 	update_time          timestamp
 );

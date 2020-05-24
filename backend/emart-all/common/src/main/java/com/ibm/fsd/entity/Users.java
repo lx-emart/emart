@@ -15,6 +15,7 @@ import java.util.Date;
 @Data
 @Table(name = "users")
 @DynamicUpdate
+@NoArgsConstructor
 public class Users implements Serializable {
 
     /**

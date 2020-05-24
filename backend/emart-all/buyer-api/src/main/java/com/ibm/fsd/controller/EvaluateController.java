@@ -17,19 +17,9 @@ public class EvaluateController {
 	EvaluateService evaluateService;
 	
 	/**
-	 * evaluate find one
-	 */
-	@RequestMapping(value = "/buyer/evaluate", method = RequestMethod.GET)
-	public ResponseEntity<Evaluate> findByOne(
-			@RequestParam(value = "productCode") String productCode,
-            @RequestParam(value = "userId") Integer userId) {
-		return ResponseEntity.ok(evaluateService.findByOne(productCode, userId));
-	}
-	
-	/**
 	 * evaluate add
 	 */
-	@RequestMapping(value = "/buyer/evaluateAdd", method = RequestMethod.POST)
+	@RequestMapping(value = "/buyer/addEvaluate", method = RequestMethod.POST)
 	public ResponseEntity<Evaluate> evaluateAdd(@RequestBody Evaluate evaluate) {
 		return ResponseEntity.ok(evaluateService.save(evaluate));
 	}

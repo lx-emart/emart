@@ -13,7 +13,7 @@ import com.ibm.fsd.entity.ProductEntity;
 public interface SellerProductService {
 
 	Page<ProductEntity> findAll(Pageable pageable);
-	Page<ProductEntity> findAllProductCodeAndCategoryCode(
+	Page<ProductEntity> findAllProductCodeOrCategoryCode(
 			String productCode, String categoryCode, Pageable pageable);
 	ProductEntity findByOne(String code);
 	ProductEntity save(ProductEntity entity);

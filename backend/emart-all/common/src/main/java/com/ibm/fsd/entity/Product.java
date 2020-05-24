@@ -10,12 +10,14 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Entity
 @Table(name = "product")
 @DynamicUpdate
+@NoArgsConstructor
 public class Product implements Serializable {
 	
 	/**

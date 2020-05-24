@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ibm.fsd.entity.ProductEntity;
+import com.ibm.fsd.models.Pages;
 import com.ibm.fsd.repository.BuyerProductRepository;
 import com.ibm.fsd.service.BuyerProductService;
 
@@ -25,6 +26,11 @@ public class BuyerProductServiceImpl implements BuyerProductService {
 		return buyerProductRepository.findAll(pageable);
 	}
 
+	@Override
+	public Page<ProductEntity> findAllProduct(Pages pages, Pageable pageable) {
+		return buyerProductRepository.findAllList(pages, pageable);
+	}
+	
 	@Override
 	public ProductEntity findByOne(String code) {
 		return buyerProductRepository.findByCode(code);

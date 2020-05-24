@@ -12,5 +12,4 @@ import com.ibm.fsd.entity.Evaluate;
 @Repository
 public interface EvaluateRepository extends JpaRepository<Evaluate, String> {
 	
-	Evaluate findByProductCodeAndUserId(String productCode, int userId);
 }

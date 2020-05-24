@@ -27,19 +27,24 @@ public class CartController {
 	}
 	
 	/**
-	 * cart add
+	 * add cart
 	 */
-	@RequestMapping(value = "/buyer/cartAdd", method = RequestMethod.POST)
-	public ResponseEntity<Cart> cartAdd(@RequestBody Cart cart) {
-		return ResponseEntity.ok(cartService.save(cart));
+	@RequestMapping(value = "/buyer/addCart", method = RequestMethod.POST)
+	public ResponseEntity<Cart> addCart(@RequestBody Cart cart) {
+		Cart one = cartService.findByProductCode(cart.getProductCode());
+		if (one != null) {
+			one.setQuantity(cart.getQuantity());
+			return ResponseEntity.ok(cartService.create(one));
+		}
+		return ResponseEntity.ok(cartService.create(cart));
 	}
 	
 	/**
-	 * cart delete
+	 * delete cart 
 	 */
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/buyer/cartDelete/{productCode}", method = RequestMethod.DELETE)
-	public ResponseEntity cartDelete(@PathVariable("productCode") String productCode) {
+	@RequestMapping(value = "/buyer/deleteCart/{productCode}", method = RequestMethod.DELETE)
+	public ResponseEntity deleteCart(@PathVariable("productCode") String productCode) {
 		cartService.delete(productCode);
 		return ResponseEntity.ok().build();
 	}

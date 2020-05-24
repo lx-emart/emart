@@ -53,7 +53,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 	}
 
 	@Override
-	public Page<ProductEntity> findAllProductCodeAndCategoryCode(String productCode, String categoryCode,
+	public Page<ProductEntity> findAllProductCodeOrCategoryCode(String productCode, String categoryCode,
 			Pageable pageable) {
 		return sellerProductRepository.findByCodeOrCategoryCodeOrderByCodeAsc(productCode, categoryCode, pageable);
 	}

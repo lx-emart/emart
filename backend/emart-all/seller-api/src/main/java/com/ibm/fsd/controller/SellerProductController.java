@@ -71,8 +71,8 @@ public class SellerProductController {
 	 * @return all data
 	 */
 	@RequestMapping(value = "/seller/search", method = RequestMethod.POST)
-	public Page<ProductEntity> findAllProductCodeAndCategoryCode(@Valid @RequestBody Pages pages) {
-		return sellerProductService.findAllProductCodeAndCategoryCode(
+	public Page<ProductEntity> findAllProductCodeOrCategoryCode(@Valid @RequestBody Pages pages) {
+		return sellerProductService.findAllProductCodeOrCategoryCode(
 				pages.getCode(), pages.getType(), PageRequest.of(pages.getPage() - 1, pages.getSize()));
 	}
 

@@ -9,5 +9,9 @@ public class Pages {
 	private int size;
 	private String code;
 	private String type;
+	private String name;
+	private String manu;
+	private int startPrice;
+    private int endPrice;
 
 }

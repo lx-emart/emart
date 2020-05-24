@@ -1,5 +1,6 @@
 package com.ibm.fsd.service;
 
+
 import java.util.List;
 
 import com.ibm.fsd.entity.Cart;
@@ -10,6 +11,8 @@ import com.ibm.fsd.entity.Cart;
 public interface CartService {
 
 	List<Cart> findAll();
-	Cart save(Cart cart);
+	Cart create(Cart cart);
+	int update(Cart cart);
+	Cart findByProductCode(String productCode);
 	void delete(String productCode);
 }

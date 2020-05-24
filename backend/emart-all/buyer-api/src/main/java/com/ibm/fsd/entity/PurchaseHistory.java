@@ -37,8 +37,11 @@ public class PurchaseHistory implements Serializable {
 	@Column(name = "price")
 	private double price;
 	
+	@Column(name = "quantity")
+	private int quantity;
+	
 	@Column(name = "purchase_date")
-	private Date purchaseDate;
+	private String purchaseDate;
 	
 	@Column(name = "image_url")
 	private String imageUrl;

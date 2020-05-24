@@ -40,9 +40,6 @@ public class Evaluate implements Serializable {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
-	@Column(name = "user_id")
-	private int userId;
-	
 	@CreationTimestamp
 	@Column(name = "create_time")
     private Date createTime;

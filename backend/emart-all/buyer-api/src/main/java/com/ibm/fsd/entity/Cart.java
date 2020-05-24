@@ -37,6 +37,9 @@ public class Cart implements Serializable {
 	@Column(name = "price")
 	private double price;
 	
+	@Column(name = "stock")
+	private int stock;
+	
 	@Column(name = "quantity")
 	private int quantity;
 	
