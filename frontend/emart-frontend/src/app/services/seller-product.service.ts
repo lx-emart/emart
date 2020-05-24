@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {apiUrl} from '../../environments/environment';
 import {sellerApiUrl} from '../../environments/environment';
 import {Product} from '../models/Product';
 import {Pages} from '../models/Pages';

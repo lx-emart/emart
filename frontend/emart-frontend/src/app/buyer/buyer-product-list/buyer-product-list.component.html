@@ -1,56 +1,63 @@
+
 <div class="container">
   <br>
   <div class="row">
-    <div class="form-group form-inline">
-      <input class="form-control ml-2" type="text" name="searchTerm" placeholder="search"/>
-      <label class="padding-left" for="manufacturer">Manufacturer</label>
-      <select class="custom-select ml-2" id="manufacturer" name="manufacturer"
-              required>
-        <option [ngValue]=0>Any</option>
-        <option [ngValue]=1>TLC</option>
-        <option [ngValue]=2>Lancome</option>
-        <option [ngValue]=3>Apple</option>
-      </select>
-      <label class="padding-left" for="categoryType">CategoryType</label>
-      <select class="custom-select ml-2" id="categoryType" name="categoryType"
-              required>
-        <option [ngValue]=0>Any</option>
-        <option [ngValue]=1>TV</option>
-        <option [ngValue]=2>iphone</option>
-        <option [ngValue]=3>Makeup</option>
-      </select>
-      <label class="padding-left" for="stratPrice">price</label>
-      <select class="custom-select ml-2" id="stratPrice" name="stratPrice"
-              required>
-        <option [ngValue]=0>100</option>
-        <option [ngValue]=1>1000</option>
-        <option [ngValue]=2>10000</option>
-        <option [ngValue]=3>100000</option>
-      </select>
-      <label class="padding-left">
-        <button class="btn btn-primary ">search</button>
-      </label>
-    </div>
+    <form [formGroup]="buyerSearchForm" class="bs-example bs-example-form" novalidate>
+      <div class="form-group form-inline">
+        <input class="form-control ml-2" type="text" id="searchTerm" formControlName="searchTerm" placeholder="input product name "/>
+        <label class="padding-left" for="manufacturer">Manufacturer</label>
+        <select class="custom-select ml-2" id="manufacturer" formControlName="manufacturer"
+                required>
+          <option value="">ALL</option>
+          <option *ngFor="let item of manufacturers" [value]="item.manufacturerCode">{{item.manufacturerName}}</option>
+        </select>
+        <label class="padding-left" for="categoryType">CategoryType</label>
+        <select class="custom-select ml-2" id="categoryType" formControlName="categoryType"
+                required>
+          <option value="">ALL</option>
+          <option *ngFor="let item of categorys" [value]="item.categoryCode">{{item.categoryName}}</option>
+        </select>
+      </div>
+      <div class="form-group form-inline">
+        <div class="input-group ml-2">
+          <span class="input-group-text">$</span>
+          <input formControlName="startPrice" type="number" class="form-control" id="startPrice" placeholder="Start Price">
+          <span class="input-group-text">.00</span>
+        </div>
+        ～
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input formControlName="endPrice" type="number" class="form-control" id="endPrice" placeholder="End Price">
+          <span class="input-group-text">.00</span>
+        </div>
+        <label class="padding-left">
+          <button class="btn btn-primary" style="margin-left: 5em;" (click)="search()">search</button>
+        </label>
+      </div>
+  </form>
   </div>
   <hr>
   <div class="row card-deck text-center">
-    <div class="col-lg-4 ">
+    <div *ngFor="let product of page?.content" class="col-lg-4 ">
       <div class="card mb-4">
-        <img height="50%" class="card-img-top">
+        <img class="card-img-top product-image" src="{{product.imageUrl}}">
         <div class="card-body">
-          <h4 class="card-title ">name</h4>
+          <h4 class="card-title ">{{product.name}}</h4>
           <div class="text-left">
-            <p class="card-test"><strong>Type: </strong>type</p>
-            <p class="card-text"><strong>Price: </strong>price</p>
-            <p class="card-text"><strong>Stock: </strong>stock</p>
-            <p class="card-text"><strong>Salesvolume: </strong>Salesvolume</p>
+            <p class="card-test"><strong>Description: </strong>{{product.description}}</p>
+            <p class="card-text"><strong>Price: </strong>{{product.price | currency}}</p>
+            <p class="card-text"><strong>Stock: </strong>{{product.stock}}</p>
+            <p class="card-text"><strong>Sales Volume: </strong>{{product.salesVolume}}</p>
           </div>
           <br>
-          <a routerLink="/product/1" class="btn btn-primary btn-lg">detail</a>
+          <a routerLink="/buyer-product-detail/{{product.code}}" *ngIf="product.active == 0; else offBlock"
+          class="btn btn-primary btn-lg">Detail</a>
+          <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Sell up</a></ng-template>
         </div>
       </div>
     </div>
   </div>
 </div>
+<app-page [currentPage]="page" ></app-page>
 
 

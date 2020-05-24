@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      // alert(localStorage.getItem('current_user'))
       // if (!localStorage.getItem('current_user')) {
       //   alert('Please Sign in')
       //   return false;
@@ -30,10 +29,10 @@ export class AuthGuard implements CanActivate {
         return true;
       }
 
-      console.log("Need log in");
-      // not logged in so redirect to login page with the return url{queryParams: {returnUrl: state.url}}
-      this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
-      return false;
+      // console.log("Need log in");
+      // // not logged in so redirect to login page with the return url{queryParams: {returnUrl: state.url}}
+      //this.router.navigate(['/login']);
+      //return false;
   }
 
 }

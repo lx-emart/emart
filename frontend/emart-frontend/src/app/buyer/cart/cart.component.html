@@ -1,45 +1,50 @@
-<h1 align="center" class="display-7 mb-5">Shopping cart</h1>
+<h1 align="center" class="display-7 mb-5">Shopping Cart</h1>
 
-<!--Cart Detail Table-->
 <table class="table table-striped text-center">
   <thead>
   <tr>
     <th scope="col">Picture</th>
     <th scope="col">Name</th>
     <th scope="col">Price</th>
+    <th scope="col">Stock</th>
     <th scope="col">Quantity</th>
+    <th scope="col">Subtotal</th>
     <th scope="col">Discount</th>
     <th scope="col">Action</th>
   </tr>
   </thead>
   <tbody>
-
-  <tr>
-    <th class="align-middle" scope="row">
-      <img height="100px" alt="Picture">
-    </th>
-    <td class="align-middle">name</td>
-    <td class="align-middle">price</td>
-    <td class="align-middle">
-      <input min="1" id=""
-             size="5"
-             type="number"
-             required
-             name='count'>
-    </td>
-    <td class="align-middle">10%</td>
-    <td class="align-middle">
-      <a routerLink="">Remove</a>
-    </td>
-  </tr>
+    <tr *ngFor="let cart of carts">
+      <th class="align-middle" scope="row">
+          <img height="100px"src="{{cart.imageUrl}}">
+      </th>
+      <td class="align-middle">{{cart.productName}}</td>
+      <td class="align-middle">{{cart.price | currency}}</td>
+      <td class="align-middle">{{cart.stock}}</td>
+      <td class="align-middle">
+          <input style="width: 80px;"  min="1" id="quantity"
+                 [max]=cart.stock
+                 [(ngModel)]=cart.quantity
+                 (change)="validate(cart)"
+                 type="number"
+                 name="quantity"
+                 required>
+      </td>
+      <td class="align-middle" id="cart.subtotal">{{cart.quantity * cart.price | currency}}</td>
+      <td class="align-middle">{{cart.discount}}</td>
+      <td class="align-middle">
+          <a (click)="remove(cart)" routerLink="./">Remove</a>
+      </td>
+    </tr>
   </tbody>
 </table>
 
-<div>
-  <h5 style="display: inline;">Total: 111</h5>
-  <button class="btn btn-success float-right">Payment</button>
-  <!--
-  <button class="btn btn-primary float-right">Checkout</button>-->
+<div *ngIf="carts?.length > 0; else empty">
+  <h5 style="display: inline;">Total: {{total | currency}}</h5>
+  <button (click)="payment()" class="btn btn-warning float-right">Payment</button>
 </div>
+<ng-template #empty>
+  <h4 class="text-muted text-center">Cart is empty!</h4>
+</ng-template>
 
 

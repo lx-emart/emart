@@ -1,0 +1,6 @@
+.product-image {
+    grid-area: image;
+    object-fit: contain;
+    width: 21.5rem;
+    height: 10rem;
+  }

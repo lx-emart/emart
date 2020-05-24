@@ -18,11 +18,13 @@ const httpOptions = {
 export class UserService {
 
   private currentUserSubject: BehaviorSubject<JwtResponse>;
+  public currentUser: Observable<JwtResponse>;
 
   // JWT init
   constructor(private http: HttpClient) {
     const data = localStorage.getItem('current_user');
     this.currentUserSubject = new BehaviorSubject<JwtResponse>(JSON.parse(data));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   // get jwt data
@@ -34,14 +36,11 @@ export class UserService {
   login(data): Observable<JwtResponse> {
     const url = `${apiUrl}/api/login`;
     return this.http.post<JwtResponse>(url, data, httpOptions)
-    .pipe(tap(datasponse => {
-        if (data.token) {
-          if (data.remembered) {
-            localStorage.setItem('current_user', JSON.stringify(data));
-          }
-          console.log((data.name));
-          this.currentUserSubject.next(data);
-          return data;
+    .pipe(tap(user => {
+        if (user && user.token) {
+          localStorage.setItem('current_user', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
         }
       }),
       catchError(this.handleError('Login Failed', null))

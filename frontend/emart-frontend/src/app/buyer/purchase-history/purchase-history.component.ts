@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {PurchaseHistoryService} from "../../services/purchase-history.service";
+import {PurchaseHistory} from '../../models/PurchaseHistory';
 
 @Component({
   selector: 'app-purchase-history',
@@ -7,10 +9,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PurchaseHistoryComponent implements OnInit {
 
-  constructor() {
+  page: any;
+
+  constructor(
+    private purchaseHistoryService : PurchaseHistoryService
+  ) {
   }
 
   ngOnInit(): void {
+    this.purchaseHistoryService.getAllPage(1, 3)
+      .subscribe(page => {
+        console.log(page.resultBody);
+        this.page = page.resultBody;
+      });
   }
 
 }

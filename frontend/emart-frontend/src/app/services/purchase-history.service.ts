@@ -4,7 +4,7 @@ import {UserService} from './user.service';
 import {buyerApiUrl} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {Cart} from '../models/Cart';
+import {PurchaseHistory} from '../models/PurchaseHistory';
 import {JwtResponse} from '../response/JwtResponse';
 
 const httpOptions = {
@@ -16,7 +16,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class PurchaseHistoryService {
 
   private currentUser: JwtResponse;
 
@@ -29,20 +29,19 @@ export class CartService {
     });
   }
 
-  getCart(): Observable<Cart> {
-    const url = `${buyerApiUrl}/api/buyer/cart`;
-    return this.http.get<Cart>(url).pipe();
+  getAllPage(page: number, size: number): Observable<any> {
+    //const userId = this.currentUser.id;
+    const url = `${buyerApiUrl}/api/buyer/purchaseHistory?page=${page}&size=${size}&userId=${0}`;
+    return this.http.get(url).pipe();
   }
 
-  addCart(cart: any, count: number): Observable<Cart> {
-    const memo = localStorage.getItem('current_user');
-    console.log(memo);
-    const url = `${buyerApiUrl}/api/buyer/addCart`;
-    return this.http.post<Cart>(url, new Cart(cart, count, 0), httpOptions);
+  getDetail(id: any): Observable<any> {
+    const url = `${buyerApiUrl}/api/buyer/purchaseHistory/${id}`;
+    return this.http.get(url).pipe();
   }
 
-  remove(cart: Cart) {
-    const url = `${buyerApiUrl}/api/buyer/deleteCart/${cart.productCode}`;
-    return this.http.delete(url).pipe();
+  payment(data: any): Observable<PurchaseHistory> {
+    const url = `${buyerApiUrl}/api/buyer/purchaseHistoryAdd`;
+    return this.http.post<PurchaseHistory>(url, data, httpOptions);
   }
 }

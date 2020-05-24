@@ -1,37 +1,25 @@
-<h1 align="center" class="display-7 mb-5">Detail</h1>
+<h1 align="center" class="display-7 mb-5">Product Detail</h1>
 
 <div class="row text-center justify-content-center">
-  <div class="col-lg-6 ">
-    <div class="card mb-4 ">
-      <img height="60%" class="card-img-top" src="">
+  <div class="col-lg-4">
+    <div class="card mb-4">
+      <img class="card-img-top product-image" src="{{product?.imageUrl}}">
       <div class="card-body">
-        <h4 class="card-title ">name</h4>
-        <form [formGroup]="buyerDetailForm" class="login-form" novalidate>
+          <h4 class="card-title ">{{product?.name}}</h4>
           <div class="text-left">
-            <input hidden name="productId" [value]=111>
-            <p class="card-test"><strong>name: </strong>name</p>
-            <p class="card-text">
-              <strong>Price: </strong>
-              <label id="price">price</label>
+            <p class="card-test"><strong>Description: </strong>{{product?.description}}</p>
+            <p class="card-text"><strong>Price: </strong>{{product?.price | currency}}</p>
+            <p class="card-text"><strong>Stock: </strong>{{product?.stock}}</p>
+            <p class="card-text"><strong>Quantity: </strong>
+              <input [(ngModel)]=count (change)="validate()" 
+                        type="number" name="count" min="1" [max]=product?.stock required>
             </p>
-            <p class="card-text"><strong>Stock: </strong>stock</p>
-
-            <label class="card-text">
-              <strong>Quantity: </strong>
-              <input
-                type="number"
-                name="count"
-                required
-                min="1"
-                [max]=1
-              >
-            </label>
-            <p class="card-text"><strong>Type: </strong>
-              <label id="subtotal">phno</label>
+            <p class="card-text"><strong>Subtotal: </strong>
+              <label id="subtotal">{{count * product?.price | currency}}</label>
             </p>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg">Add Cart</button>
-        </form>
+          <br>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="addCart()">Add Cart</button>
       </div>
     </div>
   </div>

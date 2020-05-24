@@ -14,6 +14,7 @@ import {BuyerProductDetailComponent} from './buyer/buyer-product-detail/buyer-pr
 import {PurchaseHistoryComponent} from './buyer/purchase-history/purchase-history.component';
 import {EvaluateComponent} from './buyer/evaluate/evaluate.component';
 import {CartComponent} from './buyer/cart/cart.component';
+import {PaymentComponent} from './buyer/payment/payment.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,11 +24,12 @@ const routes: Routes = [
   {path: 'seller-product-list', component: SellerProductListComponent, canActivate: [AuthGuard]},
   {path: 'seller-product-edit/:code', component: SellerProductEditComponent, canActivate: [AuthGuard]},
   {path: 'seller-product-add', component: SellerProductAddComponent, canActivate: [AuthGuard]},
-  {path: 'buyer-product-list', component: BuyerProductListComponent, canActivate: [AuthGuard]},
-  {path: 'buyer-product-detail', component: BuyerProductDetailComponent, canActivate: [AuthGuard]},
-  {path: 'purchase-history', component: PurchaseHistoryComponent, canActivate: [AuthGuard]},
-  {path: 'evaluate', component: EvaluateComponent, canActivate: [AuthGuard]},
-  {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
+  {path: 'buyer-product-list', component: BuyerProductListComponent},
+  {path: 'buyer-product-detail/:code', component: BuyerProductDetailComponent},
+  {path: 'purchase-history', component: PurchaseHistoryComponent},
+  {path: 'evaluate/:id', component: EvaluateComponent},
+  {path: 'cart', component: CartComponent},
+  {path: 'payment', component: PaymentComponent},
 ];
 
 @NgModule({

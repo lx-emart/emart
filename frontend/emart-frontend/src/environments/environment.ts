@@ -7,6 +7,7 @@ export const environment = {
 };
 export const apiUrl = 'http://localhost:8080';
 export const sellerApiUrl = 'http://localhost:8081';
+export const buyerApiUrl = 'http://localhost:8082';
 
 /*
  * For easier debugging in development mode, you can import the following file

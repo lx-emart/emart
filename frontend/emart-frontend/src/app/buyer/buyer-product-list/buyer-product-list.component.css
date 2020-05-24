@@ -10,3 +10,11 @@
 .padding-left {
   padding-left: 20px;
 }
+
+.product-image {
+  grid-area: image;
+  object-fit: contain;
+  width: 19rem;
+  height: 10rem;
+}
+
