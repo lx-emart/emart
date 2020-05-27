@@ -1,5 +1,5 @@
 server: 
-  port: 8080
+  port: 7001
   
 spring: 
   application: 
@@ -20,14 +20,11 @@ spring:
       database-platform: org.hibernate.dialect.MySQLDialect
       show-sql: true
 eureka:
-  instance:
-    instance-id: ${spring.application.name}:${server.port}
-    prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: false
-    fetch-registry: false
+      defaultZone: http://localhost:6001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
 logging:
   level:
     com:

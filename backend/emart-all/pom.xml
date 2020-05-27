@@ -20,6 +20,8 @@
   	<module>common</module>
   	<module>buyer-api</module>
   	<module>seller-api</module>
+  	<module>eureka-server</module>
+  	<module>zuul-gateway</module>
   </modules>
   
   <!--  Dependent version control  -->

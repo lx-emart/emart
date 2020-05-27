@@ -30,11 +30,6 @@ public class UserController {
 	@Autowired
 	SecurityService securityService;
 
-	@RequestMapping("/hello")
-	public String hello() {
-		return "hello world";
-	};
-
 	/**
 	 * login
 	 * 
