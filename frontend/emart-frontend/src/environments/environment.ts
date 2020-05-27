@@ -5,9 +5,9 @@
 export const environment = {
   production: true
 };
-export const apiUrl = 'http://localhost:8080';
-export const sellerApiUrl = 'http://localhost:8081';
-export const buyerApiUrl = 'http://localhost:8082';
+export const apiUrl = 'http://localhost:7001';
+export const sellerApiUrl = 'http://localhost:9001';
+export const buyerApiUrl = 'http://localhost:8001';
 
 /*
  * For easier debugging in development mode, you can import the following file
