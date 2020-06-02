@@ -15,4 +15,5 @@ public interface CartService {
 	int update(Cart cart);
 	Cart findByProductCode(String productCode);
 	void delete(String productCode);
+	void deleteUserId(int userId);
 }

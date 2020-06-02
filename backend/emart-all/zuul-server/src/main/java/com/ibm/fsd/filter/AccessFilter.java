@@ -33,6 +33,13 @@ public class AccessFilter extends ZuulFilter{
 	
 	@Override
 	public boolean shouldFilter() {
+		RequestContext requestContext = RequestContext.getCurrentContext();
+        HttpServletRequest request = requestContext.getRequest();
+        System.out.println(request.getRequestURI());
+        if ("/user-api/api/login".equalsIgnoreCase(request.getRequestURI())) {
+        	return false;
+        }
+		
         return true;
 	}
 

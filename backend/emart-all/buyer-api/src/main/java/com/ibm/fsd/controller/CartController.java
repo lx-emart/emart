@@ -48,5 +48,15 @@ public class CartController {
 		cartService.delete(productCode);
 		return ResponseEntity.ok().build();
 	}
+	
+	/**
+	 * delete cart 
+	 */
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/buyer/deleteUserId/{userId}", method = RequestMethod.DELETE)
+	public ResponseEntity delete(@PathVariable("userId") int userId) {
+		cartService.deleteUserId(userId);
+		return ResponseEntity.ok().build();
+	}
 
 }

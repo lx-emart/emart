@@ -51,4 +51,14 @@ public class CartServiceImpl implements CartService {
 	public Cart findByProductCode(String productCode) {
 		return cartRepository.findByProductCode(productCode);
 	}
+
+	@Override
+	public void deleteUserId(int userId) {
+		List<Cart> cartList = cartRepository.findByUserId(userId);
+		if (!cartList.isEmpty()) {
+			for (Cart cart : cartList) {
+				cartRepository.delete(cart);
+			}
+		}
+	}
 }

@@ -1,5 +1,7 @@
 package com.ibm.fsd.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,8 +18,10 @@ import com.ibm.fsd.entity.Cart;
 public interface CartRepository extends JpaRepository<Cart, String> {
 	
 	Cart findByProductCode(String productCode);
+	List<Cart> findByUserId(int userId);
 	
 	@Modifying
 	@Query(value = "update cart set quantity = :#{#cart.quantity}, sub_total = :#{#cart.subTotal} where product_code=:#{#cart.productCode}", nativeQuery = true)
 	int update(@Param("cart") Cart cart);
+	
 }
