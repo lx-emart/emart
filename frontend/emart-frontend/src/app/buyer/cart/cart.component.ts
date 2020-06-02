@@ -44,6 +44,7 @@ export class CartComponent implements OnInit, AfterContentChecked  {
 
   payment(){
     this.purchaseHistoryService.payment(this.carts).subscribe(_ => {
+        this.cartService.delete().subscribe();
         this.carts = [];
         this.router.navigate(['/payment']);
     }, error => {

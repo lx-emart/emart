@@ -2,11 +2,21 @@
   <a class="navbar-brand"><strong>eMart</strong></a>
   <div class="collapse navbar-collapse">
     <div class="navbar-nav ml-auto">
-      <a *ngIf="currentUser?.roles == Role.BUYER"
-              class="nav-item nav-link " routerLink="/cart">
+      <a *ngIf="currentUser?.roles == Role.SELLER" class="nav-item nav-link" routerLink="/seller-product-list">
+        ProductList
+      </a>
+
+      <a *ngIf="currentUser?.roles == Role.BUYER" class="nav-item nav-link" routerLink="/buyer-product-list">
+          ProductList
+      </a>
+      <a *ngIf="currentUser?.roles == Role.BUYER" class="nav-item nav-link" routerLink="/purchase-history">
+          PurchaseHistory
+      </a>
+      <a *ngIf="currentUser?.roles == Role.BUYER" class="nav-item nav-link " routerLink="/cart">
           <i class="fas fa-shopping-cart"></i>
           Cart
       </a>
+
       <ng-container *ngIf="currentUser; else noUser">
           <a class="nav-item nav-link " (click)="logout()" routerLink="/login">
             Logout

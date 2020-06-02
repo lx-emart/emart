@@ -43,4 +43,9 @@ export class CartService {
     const url = `${buyerApiUrl}/api/buyer/deleteCart/${cart.productCode}`;
     return this.http.delete(url).pipe();
   }
+
+  delete() {
+    const url = `${buyerApiUrl}/api/buyer/deleteUserId/${this.currentUser.id}`;
+    return this.http.delete(url).pipe();
+  }
 }
