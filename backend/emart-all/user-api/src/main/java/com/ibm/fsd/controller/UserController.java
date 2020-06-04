@@ -5,9 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.ibm.fsd.dto.UserDto;
+import com.ibm.fsd.exception.ErrorConstants;
+import com.ibm.fsd.exception.RequestException;
 import com.ibm.fsd.jwt.JwtResponse;
 import com.ibm.fsd.service.JwtService;
 import com.ibm.fsd.service.SecurityService;
@@ -63,16 +66,16 @@ public class UserController {
 	 * 
 	 * @param dto
 	 */
-	@RequestMapping(value = "/signup"
-            ,produces = "application/json;charset=UTF-8"
-            ,consumes = "application/json;charset=UTF-8"
-            ,method = RequestMethod.POST)
-	public ResponseEntity<UserDto> signup(@RequestBody UserDto dto) {
-		try {
-			return ResponseEntity.ok(userService.signup(dto));
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ResponseEntity<UserDto> signup(@RequestBody UserDto dto,
+			BindingResult bindingResult) {
+		
+		UserDto retDtoNotExists = userService.findByEmail(dto.getEmail());
+		
+		if (retDtoNotExists != null) {
+			throw new RequestException(ErrorConstants.ERROR_REQUEST_PARAM, "the email is existed.", bindingResult);
+        }
+		return ResponseEntity.ok(userService.signup(dto));
 	}
 	
 	/**
@@ -80,15 +83,15 @@ public class UserController {
 	 * 
 	 * @param dto
 	 */
-	@RequestMapping(value = "/passwordUpdate"
-            ,produces = "application/json;charset=UTF-8"
-            ,consumes = "application/json;charset=UTF-8"
-            ,method = RequestMethod.POST)
-	public ResponseEntity<Integer> password(@RequestBody UserDto dto) {
-		try {
-			return ResponseEntity.ok(userService.password(dto));
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+	@RequestMapping(value = "/passwordUpdate", method = RequestMethod.POST)
+	public ResponseEntity<Integer> password(@RequestBody UserDto dto,
+			BindingResult bindingResult) {
+		
+		UserDto retDtoNotExists = userService.findByEmail(dto.getEmail());
+		
+		if (retDtoNotExists == null) {
+ 			throw new RequestException(ErrorConstants.ERROR_REQUEST_PARAM, "the email is not existed.", bindingResult);
+        }
+		return ResponseEntity.ok(userService.password(dto));
 	}
 }

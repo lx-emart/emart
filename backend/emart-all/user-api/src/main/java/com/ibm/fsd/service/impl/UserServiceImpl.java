@@ -85,4 +85,17 @@ class UserServiceImpl implements UserService {
 		return userRepository.update(dto);
 	}
 
+	@Override
+	public UserDto findByEmail(String emali) {
+		UserDto dto = new UserDto();
+		// findByEmail
+		Users user = userRepository.findByEmail(emali);
+		if (user == null) {
+			return null;
+		}
+		// result copy
+		BeanUtils.copyProperties(user, dto);
+		return dto;
+	}
+
 }

@@ -15,4 +15,6 @@ public interface UserService {
 	
 	/** password update */
 	int password(UserDto dto);
+	
+	UserDto findByEmail(String emali);
 }

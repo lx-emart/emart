@@ -27,12 +27,6 @@ public class CartServiceImpl implements CartService {
 	public Cart create(Cart cart) {
 		return cartRepository.save(cart);
 	}
-	
-	@Override
-	@Transactional
-	public int update(Cart cart) {
-		return cartRepository.update(cart);
-	}
 
 	@Override
 	public List<Cart> findAll() {

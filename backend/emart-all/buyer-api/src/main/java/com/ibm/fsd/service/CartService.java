@@ -12,7 +12,6 @@ public interface CartService {
 
 	List<Cart> findAll();
 	Cart create(Cart cart);
-	int update(Cart cart);
 	Cart findByProductCode(String productCode);
 	void delete(String productCode);
 	void deleteUserId(int userId);

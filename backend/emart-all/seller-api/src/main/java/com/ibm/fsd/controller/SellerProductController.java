@@ -96,7 +96,7 @@ public class SellerProductController {
 		
 		if (productCodeNotExists != null) {
 			bindingResult.rejectValue("code", "400001",
-                            "the code is existed.");
+                            "the product code is existed.");
         }
 		if (bindingResult.hasErrors()) {
             //return ResponseEntity.badRequest().body(bindingResult);
@@ -110,11 +110,7 @@ public class SellerProductController {
 	 */
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/seller/productEdit", method = RequestMethod.PUT)
-	public ResponseEntity productEdit(@Valid @RequestBody ProductEntity entity,
-			BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(bindingResult);
-        }
+	public ResponseEntity productEdit(@Valid @RequestBody ProductEntity entity) {
 		return ResponseEntity.ok(sellerProductService.update(entity));
 	}
 	
