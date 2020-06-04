@@ -19,13 +19,16 @@
         <div class="form-group">
           <!-- input -->
           <input type="text" formControlName="email" placeholder="Email" class="form-email form-control"
-                 id="email" required>
+                 id="email" required (input)="clear()">
           <!-- error -->
           <div *ngIf="email.invalid && (email.touched || email.dirty)" class="promote-error">
             <small class="alert alert-danger" *ngIf="hasError('email','required')">
-              Please input your email address</small>
+              Email is required.</small>
             <small class="alert alert-danger" *ngIf="hasError('email','email')">
               Email address example e.g.jdoe@126.com</small>
+          </div>
+          <div *ngIf="error?.errorCode == '400001'" class="promote-error">
+            <small class="alert alert-danger" >{{error?.errorMsg}}</small>
           </div>
         </div>
 
@@ -33,12 +36,14 @@
         <div class="form-group">
           <!-- input -->
           <input type="text" formControlName="password" placeholder="Password"
-                 class="form-password form-control"
+                 class="form-password form-control" minlength="6"
                  id="password" required>
           <!-- error -->
           <div *ngIf="password.invalid && (password.touched || password.dirty)" class="promote-error">
             <small class="alert alert-danger" *ngIf="hasError('password','required')">
-              Please input your password</small>
+                Password is required.</small>
+            <small class="alert alert-danger" *ngIf="password.errors.minlength">
+                Password must be at least 6 characters long.</small>
           </div>
         </div>
 
@@ -46,13 +51,19 @@
         <div class="form-group">
           <!-- input -->
           <input type="text" formControlName="confirmPassword" placeholder="Confirm password"
-                 class="form-password form-control"
-                 id="confirmPassword" required>
+                 class="form-password form-control" minlength="6"
+                 id="confirmPassword" required (input)="clear()">
           <!-- error -->
           <div *ngIf="confirmPassword.invalid && (confirmPassword.touched || confirmPassword.dirty)"
                class="promote-error">
             <small class="alert alert-danger" *ngIf="hasError('confirmPassword','required')">
-              Please Confirm the password again</small>
+                Confirm Password is required.</small>
+              <small class="alert alert-danger" *ngIf="confirmPassword.errors.minlength">
+                ConfirmPassword must be at least 6 characters long.
+              </small>
+          </div>
+          <div *ngIf="error?.errorCode == '400002'" class="promote-error">
+            <small class="alert alert-danger" >{{error?.errorMsg}}</small>
           </div>
         </div>
 

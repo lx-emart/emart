@@ -7,6 +7,9 @@
       <label>Product Code</label>
       <input type="text" class="form-control form-control-lg" id="code" formControlName="code" placeholder="Product Code" required>
       <!-- error -->
+      <div *ngIf="errorcode == Error.CODE_400001" class="promote-error">
+        <small class="alert alert-danger" >the product code is existed.</small>
+      </div>
       <div *ngIf="code.invalid && (code.touched || code.dirty)" class="promote-error">
         <small class="alert alert-danger" *ngIf="hasError('code','required')">
           Please input product code</small>

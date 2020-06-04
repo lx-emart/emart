@@ -4,6 +4,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {Router} from '@angular/router';
 import {User} from '../models/User';
 import {UserService} from '../services/user.service';
+import {ErrorCode} from '../enum/ErrorCode';
+import {Error} from '../models/Error';
 
 
 @Component({
@@ -21,6 +23,8 @@ export class SignupComponent implements OnInit {
     private userService: UserService
   ) {
   }
+
+  error: Error;
 
   ngOnInit(): void {
     this.signupForm = this.fb.group(
@@ -93,6 +97,10 @@ export class SignupComponent implements OnInit {
     return this.signupForm.controls[controlName].hasError(errorName);
   }
 
+  clear(){
+    this.error = new Error();
+  }
+
   signup() {
     this.checkValid(
       this.username,
@@ -103,6 +111,15 @@ export class SignupComponent implements OnInit {
       this.contactNumber,
       this.companyName
     );
+
+    if (this.password.value != this.confirmPassword.value) {
+      const data: any = {
+        errorCode: "400002",
+        errorMsg: "The passwords are inconsistent, please try again"
+      };
+      this.error = data;
+      return;
+    }
     
     const user: User = {
       username: this.username.value,
@@ -118,7 +135,13 @@ export class SignupComponent implements OnInit {
     };
 
     this.userService.signUp(user).subscribe(data => {
-        this.router.navigate(['login']);
+        console.log(JSON.stringify(data));
+        const info: any = data;
+        if (info.errorCode == ErrorCode.CODE_400001) {
+          this.error = info;
+        } else {
+          this.router.navigate(['login']);
+        }
     },
     error => {
       console.log(error); // log to console instead

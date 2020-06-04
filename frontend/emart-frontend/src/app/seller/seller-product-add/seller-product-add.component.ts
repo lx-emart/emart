@@ -6,6 +6,7 @@ import {Category} from '../../models/Category';
 import {Manufacturer} from '../../models/Manufacturer';
 import {SellerProductService} from "../../services/seller-product.service";
 import {Product} from '../../models/Product';
+import {ErrorCode} from "../../enum/ErrorCode";
 
 @Component({
   selector: 'app-seller-product-add',
@@ -24,6 +25,8 @@ export class SellerProductAddComponent implements OnInit {
 
   categorys: Category[];
   manufacturers: Manufacturer[];
+  Error = ErrorCode;
+  errorcode: any;
 
   ngOnInit(): void {
       this.productAddForm = this.fb.group(
@@ -122,7 +125,14 @@ export class SellerProductAddComponent implements OnInit {
     };
 
     this.productService.create(data).subscribe(data => {
-      this.router.navigate(['seller-product-list']);
+      console.log(JSON.stringify(data));
+      const info: any = data;
+      if (info.errorCode == "400001") {
+        this.errorcode = info.errorCode;
+      } else {
+        this.errorcode = "";
+        this.router.navigate(['seller-product-list']);
+      }      
     },
     error => {
       console.log(error); // log to console instead

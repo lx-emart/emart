@@ -2,61 +2,58 @@ import {Component, OnInit} from '@angular/core';
 
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserService} from '../services/user.service';
+import {User} from '../models/User';
+import {ErrorCode} from '../enum/ErrorCode';
+import {Error} from '../models/Error';
+
+
 
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',
   styleUrls: ['./password.component.css']
 })
-export class PasswordComponent implements OnInit {
-
-  passwordForm: FormGroup;
+export class PasswordComponent implements OnInit{
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private userService: UserService) {
   }
+
+  error: Error;
+  user: User;
 
   ngOnInit(): void {
-    this.passwordForm = this.fb.group(
-      {
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
-        confirm_password: ['', [Validators.required]],
-      });
+    this.user = new User();
   }
 
-  get email(): AbstractControl {
-    return this.passwordForm.get('email');
+  clear(){
+    this.error = new Error();
   }
 
-  get password(): AbstractControl {
-    return this.passwordForm.get('password');
-  }
+  onSubmit() {
 
-  get confirm_password(): AbstractControl {
-    return this.passwordForm.get('confirm_password');
-  }
+    if (this.user.password != this.user.confirmPassword) {
+      const data: any = {
+        errorCode: "400002",
+        errorMsg: "The passwords are inconsistent, please try again"
+      };
+      this.error = data;
+      return;
+    }
 
-  hasError = (controlName: string, errorName: string) => {
-    return this.passwordForm.controls[controlName].hasError(errorName);
-  };
-
-  confirm() {
-    this.checkValid(
-      this.email,
-      this.password,
-      this.confirm_password
-    );
-  }
-
-  checkValid(...field: AbstractControl[]) {
-    field.forEach(f => {
-      if (f.invalid) {
-        f.markAsTouched();
-        f.markAsDirty();
-        f.updateValueAndValidity();
-      }
+    this.userService.password(this.user).subscribe(data => {
+        console.log(JSON.stringify(data));
+        const info: any = data;
+        if (info.errorCode == ErrorCode.CODE_400001) {
+          this.error = info;
+        } else {
+          this.router.navigate(['login']);
+        }
+    },
+    e => {
+      console.log(e); // log to console instead
     });
   }
 

@@ -57,7 +57,13 @@ export class UserService {
   // sign up
   signUp(user: User): Observable<User> {
     const url = `${apiUrl}/api/signup`;
-    return this.http.post<User>(url, user);
+    return this.http.post<User>(url, user, httpOptions);
+  }
+
+  // password
+  password(user: User): Observable<User> {
+    const url = `${apiUrl}/api/passwordUpdate`;
+    return this.http.post<User>(url, user, httpOptions);
   }
 
   /**
