@@ -1,0 +1,44 @@
+pipeline {
+   agent any
+
+   stages {
+      stage('Build') {
+         steps {
+            // clone
+            git 'https://github.com/lx-emart/emart-project.git'
+            // build
+            bat '''
+                   CD emart-project
+                   CD emart-all
+                   CD buyer-api
+                   mvn -Dmaven.test.failure.ignore=true clean package
+                '''
+         }
+
+         post {
+            success {
+               archiveArtifacts 'emart-project/emart-all/buyer-api/target/*.jar'
+            }
+         }
+      }
+      
+      stage('Deploy') {
+         steps {
+            bat '''
+                 CD emart-project
+                 CD emart-all
+                 CD buyer-api
+                 docker build -t buyer-api .
+                 
+            '''
+         }
+
+         post {
+            success {
+               bat 'docker run -d -p 8889:8080 buyer-api'
+            }
+         }
+      }
+      
+   }
+}
