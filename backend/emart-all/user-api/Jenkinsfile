@@ -35,7 +35,7 @@ pipeline {
 
          post {
             success {
-               bat 'docker run -d -p 8889:8080 user-api'
+               bat 'docker run -d -p 7001:7001 user-api'
             }
          }
       }

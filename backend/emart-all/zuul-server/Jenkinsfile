@@ -35,7 +35,7 @@ pipeline {
 
          post {
             success {
-               bat 'docker run -d -p 8889:8080 zuul-server'
+               bat 'docker run -d -p 5001:5001 zuul-server'
             }
          }
       }
